@@ -2,7 +2,7 @@
 [ ] Figure out style/ code requirements for CS163 homework assignments
 [ ] Figure out style/ code requirements for CS162 homework assignments
 
-# CS162
+# CS162 - Style requirements
 [ ] Add check for correct spelling and grammar
 [ ] Check for conventions being met for variables, constant, function names:
 	[ ] No capitalized or upper case variables
@@ -20,3 +20,8 @@
 [ ] Blank lines required between sections of program
 [ ] Curly braces always appear on line after conditional in if, switch
 [ ] Switch statement lables appear on same line of first statement
+[ ] Header at top of EACH file explaining program use, with author name, date, class number, and program number
+[ ] Header at top of each function
+[ ] Comment after each varible declaration with usage
+[ ] No use of while(1)
+[ ] No use of standard string class ("#include <string>")
