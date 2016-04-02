@@ -4,7 +4,7 @@ A description and usage for each script can be found below, and by running a scr
 
 Put paths to the places the original source will be downloaded, etc in paths.sh. Makefile needs a compile and debug target, which is contained in the one provided.
 
-# cs202/grade
+# cs{162,163,202}/grade
 Run with:
 ```
 $ grade <student-dir>
