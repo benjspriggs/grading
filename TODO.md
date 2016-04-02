@@ -39,3 +39,6 @@
 - [ ] Public, then protected or private sections for classes in that order (last two are interchangeable - clarify?)
 - [ ] Classes meet class indentation requirements
 - [ ] Destructors of classes that utilize dynamic memory must deallocate it
+- [ ] Headers must outline INPUT and OUTPUT of each function where needed (ex. not needed on void functions, but functionality still needs to be outlined in comment)
+- [ ] No use of exit, continue, break to alter loop control flow
+- [ ] Minimum 3 lines separating each function
