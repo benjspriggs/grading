@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Script to automatedly grade a student's homework
+# Runs through a series of checks, and puts output to a file
+# author :: Benjamin Spriggs
+
+
