@@ -1,6 +1,6 @@
 # TODO.md
-- [ ] Figure out style/ code requirements for CS163 homework assignments
 - [ ] Figure out style/ code requirements for CS162 homework assignments
+- [ ] Figure out style/ code requirements for CS163 homework assignments
 
 # CS162 - Style requirements
 - [ ] Add check for correct spelling and grammar
@@ -25,3 +25,17 @@
 - [ ] Comment after each varible declaration with usage
 - [ ] No use of while(1)
 - [ ] No use of standard string class ("#include <string>")
+
+# CS163 - Style requirements
+- [ ] Consistent use of blank spaces, use of comments
+- [ ] Only prefix increment/ decrement usage, unless there is some reason to use postfix
+- [ ] No passing class objects by value
+- [ ] No returning class objects or structs
+- [ ] Indent after each opening curly bracket
+- [ ] Meets all of the CS162 requirements
+- [ ] Every function must contain a return
+- [ ] Parameterless functions must have void argument
+- [ ] No including .c files
+- [ ] Public, then protected or private sections for classes in that order (last two are interchangeable - clarify?)
+- [ ] Classes meet class indentation requirements
+- [ ] Destructors of classes that utilize dynamic memory must deallocate it
