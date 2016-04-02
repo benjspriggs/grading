@@ -13,4 +13,8 @@ Will run through a series of tests, and open each of the student's source files 
 A student report will be dumped out at the end, with any notes the grader made while looking at the file.
 
 # Grade-move
+Run with:
+```
+$ grade-move <student-dir> <student-archive>
+```
 Moves files from the grading-local to grading-remote folders, adding a makefile in the proper place for convenience.
