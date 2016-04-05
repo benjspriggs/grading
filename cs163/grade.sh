@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# cs163/grade
+# cs163/grade.sh
 # Script to automatedly grade a student's homework
 # Runs through a series of checks, and puts output to a file
 # author :: Benjamin Spriggs
