@@ -43,9 +43,9 @@ into_dir_with_cpp()
   for file in *; do
     if [ -d $file ]; then # if it is a dir
       if [ $(ls -l *.cpp  2>/dev/null | wc -l ) -lt 1 ]; then # and it has cpp files
-        echo "Going into $file..."
-        cd $file # go there
-        break
+  echo "Going into $file..."
+  cd $file # go there
+  break
       fi
     fi
   done
@@ -64,7 +64,7 @@ echo "Compiling $NAME\..."
 make compile 2> >(tee $STUDENT_REPORT >&2)
 
 if [ $? -ne 0 ]; then
-  echo -e "## Program did not compile"
+  echo -e "## Program did not compile\n$(cat $STUDENT_REPORT)" > $STUDENT_REPORT
   exit
 fi
 
