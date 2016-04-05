@@ -57,4 +57,14 @@
 
 # CS202
 ## Code requirements
+- [ ] Complete and compiles
+- [ ] Runs without runtime faults
+- [ ] No use of static arrays
+- [ ] Destructors deallocate all dynamic memory
 ## Style requirements
+- [ ] Consistent style of indentation
+- [ ] No global variables
+- [ ] No use of exit, continue, break to alter control flow loops
+- [ ] No while(1) loops or while(true) loops
+- [ ] No use of the std::string class (EXCEPT IN LATER ASSIGNMENTS)
+- [ ] Each file has name of the file, student, class number in header at top of the file
