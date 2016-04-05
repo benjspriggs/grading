@@ -58,10 +58,17 @@ while [ $count -lt 1 ]; do
   count=$(ls -l *.cpp 2>/dev/null | wc -l)
 done
 
+## Program must compile
 # run the makefile with default target
 echo "Compiling $NAME\..."
-# add output if it doesn't compile
 make compile 2> >(tee $STUDENT_REPORT >&2)
+
+if [ $? -eq 1 ]; then
+  echo -e "## Program did not compile"
+  exit
+fi
+
+## Destructors deallocate all dynamic memory
 LOG_FILE="$WORKING_DIRECTORY/valgrind_output.txt"
 echo "Checking for leaks..."
 valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./a.out
@@ -69,7 +76,7 @@ valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./a.out
 if [[ $? == 2 ]]; then
   # if there is, add the valgrind output to the file
   echo "Valgrind encountered errors, dumping output to $LOG_FILE..."
-  echo "From valgrind:" > $STUDENT_REPORT
+  echo "## Destructors did not deallocate all dynamic memory\nFrom valgrind:" > $STUDENT_REPORT
   cat $LOG_FILE >> $STUDENT_REPORT
   echo "Anonymizing $STUDENT_REPORT..."
   sed -i -e "s:$(pwd):\.\.\.:g" $STUDENT_REPORT # anonymize the file paths

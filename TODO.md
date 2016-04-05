@@ -1,7 +1,7 @@
 # TODO.md
-- [ ] Figure out style/ code requirements for CS162 homework assignments
-- [ ] Figure out style/ code requirements for CS163 homework assignments
-- [ ] Figure out style/ code requirements for CS202 homework assignments
+- [x] Figure out style/ code requirements for CS162 homework assignments
+- [x] Figure out style/ code requirements for CS163 homework assignments
+- [x] Figure out style/ code requirements for CS202 homework assignments
 
 # CS162
 ## Code Requirements
