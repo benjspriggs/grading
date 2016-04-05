@@ -63,7 +63,7 @@ done
 echo "Compiling $NAME\..."
 make compile 2> >(tee $STUDENT_REPORT >&2)
 
-if [ $? -eq 1 ]; then
+if [ $? -ne 0 ]; then
   echo -e "## Program did not compile"
   exit
 fi
