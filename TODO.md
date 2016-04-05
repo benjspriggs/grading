@@ -68,3 +68,12 @@
 - [ ] No while(1) loops or while(true) loops
 - [ ] No use of the std::string class (EXCEPT IN LATER ASSIGNMENTS)
 - [ ] Each file has name of the file, student, class number in header at top of the file
+- [ ] Comments use correct spelling and grammar
+- [ ] No gotos
+- [ ] No global variables
+- [ ] All variable declarations happen before main()
+- [ ] Blank space after each function
+- [ ] Space after , . < > << >> + * / -
+- [ ] All lines between {} indented two or more spaces
+- [ ] All switches use the default label
+- [ ] IF and SWITCH statements are properly indented
