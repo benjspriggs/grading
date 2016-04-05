@@ -1,8 +1,14 @@
 # TODO.md
-- [x] Figure out style/ code requirements for CS162 homework assignments
-- [x] Figure out style/ code requirements for CS163 homework assignments
+- [ ] Figure out style/ code requirements for CS162 homework assignments
+- [ ] Figure out style/ code requirements for CS163 homework assignments
+- [ ] Figure out style/ code requirements for CS202 homework assignments
 
-# CS162 - Style requirements
+# CS162
+## Code Requirements
+- [ ] Complete and compiles (35%)
+- [ ] Runs without run-time faults (10%)
+- [ ] All functions are no larger than 30 lines of code (not including comments, blank lines, or variable declarations) (For later programs)
+## Style requirements
 - [ ] Add check for correct spelling and grammar
 - [ ] Check for conventions being met for variables, constant, function names:
 	- [ ] No capitalized or upper case variables
@@ -26,7 +32,9 @@
 - [ ] No use of while(1)
 - [ ] No use of standard string class ("#include <string>")
 
-# CS163 - Style requirements
+# CS163
+## Code requirements
+## Style requirements
 - [ ] Consistent use of blank spaces, use of comments
 - [ ] Only prefix increment/ decrement usage, unless there is some reason to use postfix
 - [ ] No passing class objects by value
@@ -42,3 +50,7 @@
 - [ ] Headers must outline INPUT and OUTPUT of each function where needed (ex. not needed on void functions, but functionality still needs to be outlined in comment)
 - [ ] No use of exit, continue, break to alter loop control flow
 - [ ] Minimum 3 lines separating each function
+
+# CS202
+## Code requirements
+## Style requirements
