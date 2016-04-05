@@ -34,6 +34,10 @@
 
 # CS163
 ## Code requirements
+- [ ] Complete and compiles
+- [ ] Runs without runtime faults
+- [ ] No use of static arrays
+- [ ] Destructors deallocate all dynamic memory
 ## Style requirements
 - [ ] Consistent use of blank spaces, use of comments
 - [ ] Only prefix increment/ decrement usage, unless there is some reason to use postfix
