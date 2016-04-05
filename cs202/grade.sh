@@ -61,7 +61,7 @@ done
 # run the makefile with default target
 echo "Compiling $NAME\..."
 # add output if it doesn't compile
-make compile 2>&1 | tee $STUDENT_REPORT
+make compile 2> >(tee $STUDENT_REPORT >&2)
 LOG_FILE="$WORKING_DIRECTORY/valgrind_output.txt"
 echo "Checking for leaks..."
 valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./a.out
