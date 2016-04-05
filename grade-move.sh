@@ -14,9 +14,11 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-PATHS=${DIR%$(basename $DIR)}paths.sh
+PATHS=${DIR%$(basename $SOURCE)}/paths.sh
 source $PATHS
 if [ -z ${GRADING_LOCAL+x} ] || [ -z ${GRADING_REMOTE+x} ] || [ -z ${LINUX+x} ] || [ -z ${MAKEFILE+x} ] ; then
+  echo $SOURCE
+  echo $DIR
   echo "Please install the path script ('path.sh') to $PATHS and update the following paths:
   GRADING_LOCAL
   GRADING_REMOTE
