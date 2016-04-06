@@ -81,19 +81,24 @@ if [[ $? != 0 ]]; then
   else
     ERR_CODE="## Program did not complete successfully due to runtime errors"
   fi
-  echo "$ERR_CODE\nFrom valgrind:" > $STUDENT_REPORT
+  echo -e "$ERR_CODE\nFrom valgrind:" > $STUDENT_REPORT
   cat $LOG_FILE >> $STUDENT_REPORT
-  echo "Anonymizing $STUDENT_REPORT..."
-  sed -i -e "s:$(pwd):\.\.\.:g" $STUDENT_REPORT # anonymize the file paths
 fi
+
+echo "Anonymizing $STUDENT_REPORT..."
+sed -i -e "s:$(pwd):\.\.\.:g" $STUDENT_REPORT # anonymize the file paths
 
 rm $LOG_FILE
 
 echo "Checking for comments, headers, whitespacing and other details in source files..."
 # open up all of their files in vim to check for formatting and add any additional notes
 # TODO add some way to process comment density?
-vim -p *.h $STUDENT_REPORT
-vim -p *.cpp $STUDENT_REPORT
+if [ -s *.h ];then
+  vim -p *.h $STUDENT_REPORT
+fi
+if [ -s *.cpp ]; then
+  vim -p *.cpp $STUDENT_REPORT
+fi
 # finish execution
 echo "Finished grading ${STUDENT_NAME%/} in $(pwd), returning to grading directory..."
 cd $WORKING_DIRECTORY
