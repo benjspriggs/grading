@@ -57,7 +57,7 @@
 
 # CS202
 ## Code requirements
-- [ ] Complete and compiles
+- [x] Complete and compiles
 - [ ] Runs without runtime faults
 - [ ] No use of static arrays
 - [ ] Destructors deallocate all dynamic memory

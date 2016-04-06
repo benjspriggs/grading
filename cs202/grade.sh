@@ -73,10 +73,15 @@ LOG_FILE="$WORKING_DIRECTORY/valgrind_output.txt"
 echo "Checking for leaks..."
 valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./a.out
 # check if the program leaks any
-if [[ $? == 2 ]]; then
+if [[ $? != 0 ]]; then
   # if there is, add the valgrind output to the file
   echo "Valgrind encountered errors, dumping output to $LOG_FILE..."
-  echo "## Destructors did not deallocate all dynamic memory\nFrom valgrind:" > $STUDENT_REPORT
+  if [[ $? == 2 ]]; then
+    ERR_CODE="## Destructors did not deallocate all dynamic memory"
+  else
+    ERR_CODE="## Program did not complete successfully due to runtime errors"
+  fi
+  echo "$ERR_CODE\nFrom valgrind:" > $STUDENT_REPORT
   cat $LOG_FILE >> $STUDENT_REPORT
   echo "Anonymizing $STUDENT_REPORT..."
   sed -i -e "s:$(pwd):\.\.\.:g" $STUDENT_REPORT # anonymize the file paths
