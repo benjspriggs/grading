@@ -5,8 +5,8 @@
 
 # CS162
 ## Code Requirements
-- [ ] Complete and compiles (35%)
-- [ ] Runs without run-time faults (10%)
+- [ ] Complete and compiles
+- [ ] Runs without run-time faults
 - [ ] All functions are no larger than 30 lines of code (not including comments, blank lines, or variable declarations) (For later programs)
 ## Style requirements
 - [ ] Add check for correct spelling and grammar
