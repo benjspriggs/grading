@@ -1,2 +1,4 @@
 *.swp
 paths.sh
+*lock*
+a.out
