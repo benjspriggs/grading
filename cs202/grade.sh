@@ -5,7 +5,9 @@
 # author :: Benjamin Spriggs
 
 WORKING_DIRECTORY=$(pwd)
+pushd `dirname $0` > /dev/null
 SCRIPT_SOURCE=$(pwd -P)
+popd > /dev/null
 HELP_MSG="Usage: grade [student-dir] [--help]
 This script takes a student's folder name and runs through automated grading operations for PSU CS202.
 It will dump out a text file with:
