@@ -9,6 +9,7 @@ comment = re.compile(r"")
 forever_while = re.compile(r"while\s?\((-?[1-9]+|true)?\)")
 class_declaration = re.compile(r"^\s?class\s\w+")
 static_var = re.compile(r"\s?\w+\s+\w+(\s?)+\[\d+\];")
+line_comment = re.compile(r"^\s?//")
 
 # Return if a substring matches a compiled regex pattern
 def has(pattern, string):
@@ -32,7 +33,7 @@ def lint(fn):
         in_comment = False
         for lineno, line in enumerate(inF.read().splitlines()):
             # TODO add more style requirements
-            if has(forever_while, line):
+            if has(forever_while, line) and not has(line_comment, line):
                 offense(lineno, "Illegal while loop", line)
                 global_offense += 1
             if in_class and has(static_var, line):
