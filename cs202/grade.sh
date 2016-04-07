@@ -5,9 +5,7 @@
 # author :: Benjamin Spriggs
 
 WORKING_DIRECTORY=$(pwd)
-pushd `dirname $0` > /dev/null
-SCRIPT_SOURCE=$(pwd -P)
-popd > /dev/null
+SCRIPT_SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 HELP_MSG="Usage: grade [student-dir] [--help]
 This script takes a student's folder name and runs through automated grading operations for PSU CS202.
 It will dump out a text file with:
@@ -91,7 +89,7 @@ fi
 rm $LOG_FILE
 
 # Check for style
-LIB_DIR=${SCRIPT_SOURCE%%/}/lib
+LIB_DIR=${SCRIPT_SOURCE_DIR%%/cs202}/lib
 $LIB_DIR/cs202-style.py *.h *.cpp
 
 echo "Manually checking for comments, headers, whitespacing and other details in source files..."
