@@ -13,6 +13,7 @@ It will dump out a text file with:
   other notes
 in the current working directory ($WORKING_DIRECTORY)."
 
+
 # display help message if requested
 for arg in $@; do
   if [ [$arg] == ["--help"] -o [$arg] == ["-h"] ]; then
@@ -21,7 +22,7 @@ for arg in $@; do
   fi
 done
 
-if [ -z $1 ]; then
+if [[ -z "$1" || ! -d "$1" ]]; then
   echo "$HELP_MSG"
   exit 1
 fi
@@ -86,6 +87,11 @@ if [[ $? != 0 ]]; then
 fi
 
 rm $LOG_FILE
+
+# Check for style
+SCRIPT_SOURCE=$(pwd -P)
+LIB_DIR=${SCRIPT_SOURCE%%/}/lib
+$LIB_DIR/cs202-style.py *.h *.cpp
 
 echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 # open up all of their files in vim to check for formatting and add any additional notes
