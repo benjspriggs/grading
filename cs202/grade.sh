@@ -5,6 +5,7 @@
 # author :: Benjamin Spriggs
 
 WORKING_DIRECTORY=$(pwd)
+SCRIPT_SOURCE=$(pwd -P)
 HELP_MSG="Usage: grade [student-dir] [--help]
 This script takes a student's folder name and runs through automated grading operations for PSU CS202.
 It will dump out a text file with:
@@ -88,7 +89,6 @@ fi
 rm $LOG_FILE
 
 # Check for style
-SCRIPT_SOURCE=$(pwd -P)
 LIB_DIR=${SCRIPT_SOURCE%%/}/lib
 $LIB_DIR/cs202-style.py *.h *.cpp
 
