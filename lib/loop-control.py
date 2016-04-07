@@ -7,7 +7,7 @@ import sys, getopt, re
 
 forever_while = re.compile(r"while\s?\((-?[1-9]+|true)?\)")
 class_declaration = re.compile(r"^\s?class\s\w+")
-bracket = re.compile(r"\{\}")
+static_var = re.compile(r"\s+?\w+?\s+\w+(\s?+)\[\d+\];")
 
 # Return if a substring matches a compiled regex pattern
 def has(pattern, string):
@@ -19,12 +19,15 @@ def offense(lineno, offense, line):
     print(offense + " at line " + str(lineno) + ": \"" + line + "\"")
 
 def main(argv):
-    with open("loop-control.py") as inF:
+    with open("loop-control.py", 'r') as inF:
+        in_class = False
         for lineno, line in enumerate(inF.read().splitlines()):
             if has(forever_while, line):
-                offense(lineno, "The line had an illegal while loop", line)
+                offense(lineno, "Illegal while loop", line)
+            if in_class and has(static_var, line):
+                offense(lineno, "Static member detected", line)
             if has(class_declaration, line):
-                offense(lineno, "Class declaration", line)
+                in_class = True
 
 if __name__ == "__main__":
     main(sys.argv[1:])
