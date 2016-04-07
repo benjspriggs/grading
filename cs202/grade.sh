@@ -90,7 +90,7 @@ sed -i -e "s:$(pwd):\.\.\.:g" $STUDENT_REPORT # anonymize the file paths
 
 rm $LOG_FILE
 
-echo "Checking for comments, headers, whitespacing and other details in source files..."
+echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 # open up all of their files in vim to check for formatting and add any additional notes
 # TODO add some way to process comment density?
 if [ -s *.h ];then
