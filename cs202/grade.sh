@@ -5,7 +5,7 @@
 # author :: Benjamin Spriggs
 
 WORKING_DIRECTORY=$(pwd)
-SCRIPT_SOURCE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+SCRIPT_SOURCE_DIR=$(readlink -f $0)
 HELP_MSG="Usage: grade [student-dir] [--help]
 This script takes a student's folder name and runs through automated grading operations for PSU CS202.
 It will dump out a text file with:
