@@ -19,7 +19,12 @@ def offense(lineno, offense, line):
         offense = "Offense"
     print(offense + " at line " + str(lineno) + ": \"" + line + "\"")
 
+# checks a filename for any offenses, prints out a statement at completion
+# returns the number of offenses in the file
 def lint(fn):
+    if ".cpp" not in fn:
+        print("Non C++ files cannot be linted with this tool.")
+        return 0
     global_offense = 0
     with open(fn, 'r') as inF:
         in_class = False
@@ -33,10 +38,12 @@ def lint(fn):
                 global_offense += 1
             if has(class_declaration, line):
                 in_class = True
-    print("There were " + str(global_offense) + " offenses in '" + fn + "'")
+    if global_offense > 0:
+        print("There were " + str(global_offense) + " offenses in '" + fn + "'")
+    return global_offense
 
 def main(argv):
-    lint(argv[1])
+    return lint(argv[0])
 
 if __name__ == "__main__":
     if len(sys.argv) == 1:
