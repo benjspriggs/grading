@@ -85,9 +85,6 @@ if [[ $? != 0 ]]; then
   cat $LOG_FILE >> $STUDENT_REPORT
 fi
 
-echo "Anonymizing $STUDENT_REPORT..."
-sed -i -e "s:$(pwd):\.\.\.:g" $STUDENT_REPORT # anonymize the file paths
-
 rm $LOG_FILE
 
 echo "Manually checking for comments, headers, whitespacing and other details in source files..."
@@ -99,7 +96,11 @@ fi
 if [ -s *.cpp ]; then
   vim -p *.cpp $STUDENT_REPORT
 fi
+
 # finish execution
+echo "Anonymizing $STUDENT_REPORT..."
+sed -i -e "s:$(pwd):\.\.\.:g" $STUDENT_REPORT # anonymize the file paths
+
 echo "Finished grading ${STUDENT_NAME%/} in $(pwd), returning to grading directory..."
 cd $WORKING_DIRECTORY
 echo "Done."
