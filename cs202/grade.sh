@@ -72,9 +72,8 @@ fi
 ## Destructors deallocate all dynamic memory
 LOG_FILE="$WORKING_DIRECTORY/valgrind_output.txt"
 echo "Checking for leaks..."
-valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./a.out
 # check if the program leaks any
-if [[ $? != 0 ]]; then
+if valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./a.out; then
   # if there is, add the valgrind output to the file
   echo "Valgrind encountered errors, dumping output to $LOG_FILE..."
   if [[ $? == 2 ]]; then
