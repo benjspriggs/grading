@@ -5,7 +5,8 @@
 # author :: Benjamin Spriggs
 
 WORKING_DIRECTORY=$(pwd)
-SCRIPT_SOURCE_DIR=$(readlink -f $0)
+SCRIPT_SOURCE=$(readlink -f $0)
+GRADING_HOME=${SCRIPT_SOURCE%%/cs202/grade.sh}
 HELP_MSG="Usage: grade [student-dir] [--help]
 This script takes a student's folder name and runs through automated grading operations for PSU CS202.
 It will dump out a text file with:
@@ -89,7 +90,7 @@ fi
 rm $LOG_FILE
 
 # Check for style
-LIB_DIR=${SCRIPT_SOURCE_DIR%%/cs202}/lib
+LIB_DIR=$GRADING_HOME/lib
 $LIB_DIR/cs202-style.py *.h *.cpp
 
 echo "Manually checking for comments, headers, whitespacing and other details in source files..."
