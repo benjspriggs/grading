@@ -2,3 +2,4 @@
 paths.sh
 *lock*
 a.out
+*.pyc
