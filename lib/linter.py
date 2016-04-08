@@ -9,6 +9,7 @@ forever_while = re.compile(r"while\s?\((-?[1-9]+|true)?\)")
 class_declaration = re.compile(r"^\s?class\s\w+")
 static_var = re.compile(r"\s?\w+\s+\w+(\s?)+\[\d+\];")
 line_comment = re.compile(r"^\s?//")
+illegal_patterns = [forever_while]
 
 # Return if a substring matches a compiled regex pattern
 def has(pattern, string):
@@ -19,6 +20,11 @@ def offense(lineno, offense, line):
         offense = "Offense"
     print(offense + " at line " + str(lineno) + ": \"" + line + "\"")
     return 1
+
+# Returns if this line matches a pattern and is not a comment
+def has_pattern(pattern, line):
+    return has(pattern, line) and not has(line_comment, line)
+
 
 # checks a filename for any offenses, prints out a statement at completion
 # returns the number of offenses in the file
@@ -32,10 +38,10 @@ def lint(fn):
         in_comment = False
         for lineno, line in enumerate(inF.read().splitlines()):
             # TODO add more style requirements
-            if has(forever_while, line) and not has(line_comment, line):
+            if has_pattern(forever_while, line):
                 offense(lineno, "Illegal while loop", line)
                 global_offense += 1
-            if in_class and has(static_var, line):
+            if in_class and has_pattern(static_var, line):
                 offense(lineno, "Static member detected", line)
                 global_offense += 1
             if has(class_declaration, line): # TODO have this check the rest of a class's definition instead of setting a boolean flag
@@ -52,10 +58,3 @@ if __name__ == "__main__":
         print(sys.argv[0] + " <filename> ")
         exit(1)
     main(sys.argv[1:])
-"""
-class SomeClass
-{
-    public:
-        int staticArray[23];
-}
-"""
