@@ -4,7 +4,6 @@
 import loop_control, sys, getopt
 
 if __name__ == "__main__":
-    print("Hello World!")
     for each in sys.argv[1:]:
-        print("Doing " + each)
+        print("Linting " + each)
         loop_control.lint(each)
