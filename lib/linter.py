@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-# loop-control.py
-# Ensures provided C++ source meets loop control standards
-# ex. no break, while(true), continue
+# linter.py
+# Does some basic linting
 
 import sys, getopt, re
 
@@ -9,7 +8,6 @@ forever_while = re.compile(r"while\s?\((-?[1-9]+|true)?\)")
 class_declaration = re.compile(r"^\s?class\s\w+")
 static_var = re.compile(r"\s?\w+\s+\w+(\s?)+\[\d+\];")
 line_comment = re.compile(r"^\s?//")
-illegal_patterns = [forever_while]
 
 # Return if a substring matches a compiled regex pattern
 def has(pattern, string):
