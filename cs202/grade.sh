@@ -92,8 +92,8 @@ rm $LOG_FILE
 
 # Check for style
 LIB_DIR=$GRADING_HOME/lib
-echo "Checking obvious style errors..."
-python $LIB_DIR/cs202_style.py *.h *.cpp | tee -a $STUDENT_REPORT
+echo "Checking obvious code errors..."
+python $LIB_DIR/cs202_code.py *.h *.cpp | tee -a $STUDENT_REPORT
 
 echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 # open up all of their files in vim to check for formatting and add any additional notes
