@@ -97,10 +97,10 @@ python $LIB_DIR/cs202_style.py *.h *.cpp | tee -a $STUDENT_REPORT
 echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 # open up all of their files in vim to check for formatting and add any additional notes
 # TODO add some way to process comment density?
-if [ -s *.h ];then
+if ls -l *.h > /dev/null 2>&1;then
   vim -p *.h $STUDENT_REPORT
 fi
-if [ -s *.cpp ]; then
+if ls -l *.cpp > /dev/null 2>&1; then
   vim -p *.cpp $STUDENT_REPORT
 fi
 
