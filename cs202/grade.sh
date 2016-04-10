@@ -64,7 +64,7 @@ done
 ## Program must compile
 # run the makefile with default target
 echo "Compiling $NAME\..."
-make compile 2> >(tee $STUDENT_REPORT >&2)
+make compile 2>&1 >(tee $STUDENT_REPORT >&2)
 
 if [ $? -ne 0 ]; then
   echo -e "## Program did not compile\n$(cat $STUDENT_REPORT)" | tee $STUDENT_REPORT
