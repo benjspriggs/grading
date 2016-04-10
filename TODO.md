@@ -8,6 +8,7 @@
 - [ ] Complete and compiles
 - [ ] Runs without run-time faults
 - [ ] All functions are no larger than 30 lines of code (not including comments, blank lines, or variable declarations) (For later programs)
+
 ## Style requirements
 - [ ] Add check for correct spelling and grammar
 - [ ] Check for conventions being met for variables, constant, function names:
@@ -38,6 +39,7 @@
 - [ ] Runs without runtime faults
 - [ ] No use of static arrays
 - [ ] Destructors deallocate all dynamic memory
+
 ## Style requirements
 - [ ] Consistent use of blank spaces, use of comments
 - [ ] Only prefix increment/ decrement usage, unless there is some reason to use postfix
@@ -61,6 +63,7 @@
 - [x] Runs without runtime faults
 - [ ] No use of static arrays
 - [x] Destructors deallocate all dynamic memory
+
 ## Style requirements
 - [ ] Consistent style of indentation
 - [ ] No global variables
