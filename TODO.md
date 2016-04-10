@@ -61,7 +61,7 @@
 ## Code requirements
 - [x] Complete and compiles
 - [x] Runs without runtime faults
-- [ ] No use of static arrays
+- [x] No use of static arrays
 - [x] Destructors deallocate all dynamic memory
 
 ## Style requirements
