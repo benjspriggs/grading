@@ -64,6 +64,7 @@ done
 ## Program must compile
 # run the makefile with default target
 echo "Compiling $NAME\..."
+echo -e "## Compilation Output" >> $STUDENT_REPORT
 make compile 2> >(tee $STUDENT_REPORT >&2)
 
 if [ $? -ne 0 ]; then
