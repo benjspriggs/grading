@@ -65,10 +65,10 @@ done
 # run the makefile with default target
 echo "Compiling $NAME\..."
 echo -e "## Compilation Output" >> $STUDENT_REPORT
-make compile 2> >(tee $STUDENT_REPORT >&2)
+make compile 2> >(tee -a $STUDENT_REPORT >&2)
 
 if [ $? -ne 0 ]; then
-  echo -e "## Program did not compile\n$(cat $STUDENT_REPORT)" | tee $STUDENT_REPORT
+  echo -e "## Program did not compile\n$(cat $STUDENT_REPORT)" | tee -a $STUDENT_REPORT
   exit
 fi
 
