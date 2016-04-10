@@ -61,6 +61,9 @@ while [ $count -lt 1 ]; do
   count=$(ls -l *.cpp 2>/dev/null | wc -l)
 done
 
+# clear out the old student report, if it exists
+rm $STUDENT_REPORT
+
 ## Program must compile
 # run the makefile with default target
 echo "Compiling $NAME\..."
