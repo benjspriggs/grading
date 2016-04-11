@@ -1,1 +1,1 @@
-__all__ = ['test_lint.py']
+__all__ = ['test_lint']
