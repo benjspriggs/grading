@@ -5,7 +5,12 @@
 from lint import *
 
 class LoopControlLinter(Linter):
-    def lint(self, fn):
-        return 0
+    def initialize(self):
+        self.offenses = 0
 
-    def offenses():
+    def lint(self, fn):
+        return is_lintable(fn)
+
+    def offenses(self):
+        return self.offenses
+

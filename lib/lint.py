@@ -16,5 +16,11 @@ class Linter:
         raise NotImplementedError()
 
     # Return if this line has a pattern and is not a line comment
+    @staticmethod
     def has(pattern, line):
         return re.search(pattern, line) and not re.search(line_comment, line)
+
+    # Return if a filename is lintable (based on its filename)
+    @staticmethod
+    def is_lintable(fn):
+        return ".cpp" in fn or ".h" in fn
