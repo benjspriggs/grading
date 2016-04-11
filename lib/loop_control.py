@@ -2,6 +2,10 @@
 # loop_control.py
 # A class that lints a file, checking for illegal loops
 
-import lint
+from lint import *
 
 class LoopControlLinter(Linter):
+    def lint(self, fn):
+        return 0
+
+    def offenses():
