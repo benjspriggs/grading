@@ -6,18 +6,20 @@ from lint import *
 
 class LoopControlLinter(Linter):
     forever_while = re.compile(r"while\s?\((-?[1-9]+|true)?\)")
-    def initialize(self):
-        self.offenses = 0
+    def __init__(self):
+        self.offense_list = []
 
     def lint(self, fn):
-        if is_lintable(fn):
-            with open(fn, 'r') as inF:
-                for line in inF.read().splitlines():
-                    if has(forever_while, line):
-                        self.offenses.append((lineno, line, fn))
+        if Linter.is_lintable(fn):
+            file_and_lines = enumerate(open(fn, 'rb').read().splitlines())
+            offending_lines = filter(lambda x: self.has(self.forever_while, x[1]), file_and_lines)
+            self.offense_list.extend(offending_lines)
+            return len(file_and_lines)
+        return 0
 
     def offenses(self):
-        return len(self.offenses)
+        return len(self.offense_list)
 
     def report(self):
-        print("There were " + str(offenses()) + " in the files.")
+        print("There were " + str(self.offenses()) + " in the files.")
+        print(self.offense_list)
