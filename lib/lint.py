@@ -15,6 +15,9 @@ class Linter:
     def offenses(self):
         raise NotImplementedError()
 
+    def report(self):
+        raise NotImplementedError()
+
     # Return if this line has a pattern and is not a line comment
     @staticmethod
     def has(pattern, line):
