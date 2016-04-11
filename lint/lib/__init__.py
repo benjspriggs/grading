@@ -1,1 +1,2 @@
-__all__ = ['lint', 'linter', 'loop_control']
+from lint import Linter
+from loop_control import LoopControlLinter

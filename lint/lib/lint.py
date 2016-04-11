@@ -4,7 +4,7 @@
 
 import re
 
-class Linter:
+class Linter(object):
     line_comment = re.compile(r"^\s?//")
     # Take a file and lint it
     # return the number of lines processed in the file
@@ -21,7 +21,7 @@ class Linter:
     # Return if this line has a pattern and is not a line comment
     @staticmethod
     def has(pattern, line):
-        return re.search(pattern, line) and not re.search(line_comment, line)
+        return re.search(pattern, line) and not re.search(Linter.line_comment, line)
 
     # Return if a filename is lintable (based on its filename)
     @staticmethod
