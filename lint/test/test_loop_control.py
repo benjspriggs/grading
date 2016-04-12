@@ -14,6 +14,8 @@ class LoopControlLinterTest(TestCase):
     def test_offenses(self):
         l = LoopControlLinter()
         self.assertEquals(0, l.offenses())
+        l.lint(self.has_while_file)
+        self.assertEquals(1, l.offenses())
 
 if __name__ == "__main__":
     main()
