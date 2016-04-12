@@ -11,7 +11,7 @@ class LoopControlLinter(Linter):
 
     def lint(self, fn):
         if Linter.is_lintable(fn):
-            file_and_lines = [x for x in enumerate(open(fn, 'rb').read().splitlines())]
+            file_and_lines = Linter.number_and_line(fn)
             offending_lines = filter(lambda x: self.has(self.forever_while, x[1]), file_and_lines)
             self.offense_list.extend(offending_lines)
             return len(file_and_lines)

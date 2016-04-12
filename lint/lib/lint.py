@@ -27,3 +27,8 @@ class Linter(object):
     @staticmethod
     def is_lintable(fn):
         return ".cpp" in fn or ".h" in fn
+
+    # Return a list of tuples, (filenumber, "line")
+    @staticmethod
+    def number_and_line(fn):
+        return [x for x in enumerate(open(fn, 'rb').read().splitlines())]
