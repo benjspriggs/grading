@@ -93,7 +93,7 @@ fi
 
 rm $LOG_FILE
 
-# Check for style
+# Check for code requirements 
 LIB_DIR=$GRADING_HOME/lib
 echo "Checking obvious code errors..."
 python $LIB_DIR/cs202_code.py *.h *.cpp | tee -a $STUDENT_REPORT
