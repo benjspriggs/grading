@@ -25,5 +25,6 @@ if valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./$1; then
   cat $LOG_FILE >> $STUDENT_REPORT
 fi
 
+# clean up
 rm $LOG_FILE
 

@@ -7,6 +7,7 @@
 WORKING_DIRECTORY=$(pwd)
 SCRIPT_SOURCE=$(readlink -f $0)
 GRADING_HOME=${SCRIPT_SOURCE%%/cs202/grade.sh}
+LIB_DIR=$GRADING_HOME/lib
 HELP_MSG="Usage: grade [student-dir] [--help]
 This script takes a student's folder name and runs through automated grading operations for PSU CS202.
 It will dump out a text file with:
@@ -65,12 +66,11 @@ source $GRADING_HOME/fragments/compile.sh a.out
 source $GRADING_HOME/fragments/leak-check.sh a.out
 
 # Check for style
-LIB_DIR=$GRADING_HOME/lib
 echo "Checking obvious code errors..."
 python $LIB_DIR/cs202_code.py *.h *.cpp | tee -a $STUDENT_REPORT
 
-echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 # open up all of their files in vim to check for formatting and add any additional notes
+echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 # TODO add some way to process comment density?
 if ls -l *.h > /dev/null 2>&1;then
   vim -p *.h $STUDENT_REPORT
