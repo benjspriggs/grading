@@ -4,7 +4,7 @@
 # puts the executable into a.out,
 # dumps errors and such into STUDENT_REPORT
 
-# run the makefile with default target
+# Compile with all errors enabled
 echo "Compiling $NAME\..."
 echo -e "## Compilation Output" >> $STUDENT_REPORT
 g++ *.cpp -g -Wall -o a.out 2> >(tee -a $STUDENT_REPORT >&2)
