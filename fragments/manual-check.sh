@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # fragments/manual-check.sh
 # Manually open up all .h and .cpp files
-# in the current directory
+# in the current directory,
+# and a copy of the STUDENT_REPORT
 
 # TODO add some way to process comment density?
 if ls -l *.h > /dev/null 2>&1;then
