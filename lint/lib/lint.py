@@ -43,7 +43,7 @@ class Linter(object):
     #   block comments
     @staticmethod
     def parseable_lines(fn):
-        no_line = filter(lambda x: not Linter.has(Linter.line_comment, x[1]),
+        no_line = filter(lambda x: all(x) and not Linter.has(Linter.line_comment, x[1]),
                Linter.number_and_line(fn))
         in_comment = False
         for pair in no_line: # TODO find the proper functional way to do this
