@@ -7,10 +7,15 @@ from lib import LoopControlLinter
 class LoopControlLinterTest(TestCase):
     has_while_file = "test/fixtures/has-forever-while.cpp"
     has_while_file_bad = "test/fixtures/has-forever-while-bad-format.cpp"
+    well_formatted = "test/fixtures/well-formatted.cpp"
 
     def test_lint(self):
-        self.assertNotEquals(LoopControlLinter.parseable_lines(self.has_while_file),
-                LoopControlLinter().lint(self.has_while_file))
+        l = [LoopControlLinter(), LoopControlLinter()]
+        self.assertEquals(len(LoopControlLinter.parseable_lines(self.has_while_file)),
+                l[0].lint(self.has_while_file))
+        self.assertEquals(len(LoopControlLinter.parseable_lines(self.well_formatted)),
+                l[1].lint("test/fixtures/well-formatted.cpp"))
+        self.assertNotEquals(l[0].offenses(), l[1].offenses())
 
     def test_offenses(self):
         l = LoopControlLinter()
