@@ -35,10 +35,10 @@
 
 # CS163
 ## Code requirements
-- [ ] Complete and compiles
-- [ ] Runs without runtime faults
+- [x] Complete and compiles
+- [x] Runs without runtime faults
 - [ ] No use of static arrays
-- [ ] Destructors deallocate all dynamic memory
+- [x] Destructors deallocate all dynamic memory
 
 ## Style requirements
 - [ ] Consistent use of blank spaces, use of comments
