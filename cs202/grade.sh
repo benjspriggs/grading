@@ -15,15 +15,9 @@ It will dump out a text file with:
   other notes
 in the current working directory ($WORKING_DIRECTORY)."
 
+source $GRADING_HOME/fragments/help.sh
 
-# display help message if requested
-for arg in $@; do
-  if [ [$arg] == ["--help"] -o [$arg] == ["-h"] ]; then
-    echo "$HELP_MSG"
-    exit 0
-  fi
-done
-
+# make sure we have all the arguments
 if [[ -z "$1" || ! -d "$1" ]]; then
   echo "$HELP_MSG"
   exit 1
