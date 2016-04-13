@@ -20,9 +20,9 @@ class Linter(object):
 
     def report(self):
         print "There were %d error(s) in the files."%(len(self.offense_list))
-        for filename, offenses in self.offense_list:
+        for filename in self.offense_list.iterkeys():
             print "In %s:"%(filename)
-            for num, offense in offenses:
+            for num, offense in self.offense_list[filename]:
                 print "Offense at line %s:\t%s"%(num, offense)
 
 
