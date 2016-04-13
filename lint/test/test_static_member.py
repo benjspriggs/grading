@@ -7,6 +7,12 @@ from lib import StaticMemberLinter
 
 class StaticMemberLinterTest(TestCase):
     has_static = "test/fixtures/has-static.cpp"
+    well_formatted = "test/fixtures/well-formatted.cpp"
+
     def test_lint(self):
-        self.assertNotEquals(StaticMemberLinter.parseable_lines(self.has_static),
-                StaticMemberLinter().lint(self.has_static))
+        s = [StaticMemberLinter(), StaticMemberLinter()]
+        self.assertEquals(len(StaticMemberLinter.parseable_lines(self.has_static)),
+                s[0].lint(self.has_static))
+        self.assertEquals(len(StaticMemberLinter.parseable_lines(self.well_formatted)),
+                s[1].lint("test/fixtures/well-formatted.cpp"))
+        self.assertNotEquals(s[0].offenses(), s[1].offenses())
