@@ -1,4 +1,5 @@
 // has-static.cpp
+// this file has 1 offense
 
 class StaticMemberClass
 {

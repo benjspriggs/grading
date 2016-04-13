@@ -18,10 +18,11 @@ class Linter(object):
     def offenses(self):
         return sum(len(v) for v in self.offense_list.itervalues())
 
+    # Report the errors in each file detected
     def report(self):
         print "There were %d error(s) in the files."%(len(self.offense_list))
         for filename in self.offense_list.iterkeys():
-            print "In %s:"%(filename)
+            print "In \"%s\":"%(filename)
             for num, offense in self.offense_list[filename]:
                 print "Offense at line %s:\t%s"%(num, offense)
 
