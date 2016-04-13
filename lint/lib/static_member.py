@@ -18,10 +18,7 @@ class StaticMemberLinter(Linter):
                     file_and_lines.remove(pair)
                 else:
                     in_class = Linter.has(class_declaration, pair[1]) is not None
-            self.offense_list.extend(file_and_lines)
+            self.offense_list[str(fn)] = file_and_lines
             return count
         return 0
-
-    def offenses(self):
-        return len(self.offense_list)
 

@@ -10,12 +10,9 @@ class LoopControlLinter(Linter):
         if Linter.is_lintable(fn):
             file_and_lines = Linter.parseable_lines(fn)
             offending_lines = filter(lambda x: self.has(self.forever_while, x[1]), file_and_lines)
-            self.offense_list.extend(offending_lines)
+            self.offense_list[str(fn)] = offending_lines
             return len(file_and_lines)
         return 0
-
-    def offenses(self):
-        return len(self.offense_list)
 
     def report(self):
         print("There were " + str(self.offenses()) + " in the files.")

@@ -8,7 +8,7 @@ class Linter(object):
     line_comment = re.compile(r"^\s?//")
 
     def __init__(self):
-        self.offense_list = []
+        self.offense_list = {}
     # Take a file and lint it
     # return the number of lines processed in the file
     def lint(self, fn):
@@ -16,10 +16,15 @@ class Linter(object):
 
     # Return the number of offenses detected by this linter
     def offenses(self):
-        raise NotImplementedError()
+        return sum(len(v) for v in self.offense_list.itervalues())
 
     def report(self):
-        raise NotImplementedError()
+        print "There were %d error(s) in the files."%(len(self.offense_list))
+        for filename, offenses in self.offense_list:
+            print "In %s:"%(filename)
+            for num, offense in offenses:
+                print "Offense at line %s:\t%s"%(num, offense)
+
 
     # Return if this line has a pattern
     @staticmethod
@@ -46,11 +51,11 @@ class Linter(object):
         no_line = filter(lambda x: all(x) and not Linter.has(Linter.line_comment, x[1]),
                Linter.number_and_line(fn))
         in_comment = False
-        for pair in no_line: # TODO find the proper functional way to do this
+        for (filenumber, line) in no_line: # TODO find the proper functional way to do this
             if in_comment:
-                no_line.remove(pair)
-            if Linter.has(r"\/\*", pair[1]):
+                no_line.remove((filenumber, line))
+            if Linter.has(r"\/\*", line):
                 in_comment = True
-            if Linter.has(r"\*\/", pair[1]):
+            if Linter.has(r"\*\/", line):
                 in_comment = False
         return no_line
