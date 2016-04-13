@@ -27,10 +27,6 @@ class TestLinter(unittest.TestCase):
         with self.assertRaises(NotImplementedError):
             TestLinter.lint.offenses()
 
-    def test_report(self):
-        with self.assertRaises(NotImplementedError):
-            TestLinter.lint.report()
-
     def test_number_and_lines(self):
         self.assertNotEquals(
                 len(Linter.number_and_line(self.well_formatted)), 0)
