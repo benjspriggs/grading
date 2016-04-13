@@ -7,6 +7,8 @@ from lib import Linter
 
 class TestLinter(unittest.TestCase):
     lint = Linter()
+    well_formatted = "test/fixtures/well-formatted.cpp"
+
     def test_is_lintable(self):
         self.assertTrue(Linter.is_lintable("test.cpp"))
         self.assertTrue(Linter.is_lintable("test.h"))
@@ -28,6 +30,9 @@ class TestLinter(unittest.TestCase):
     def test_report(self):
         with self.assertRaises(NotImplementedError):
             TestLinter.lint.report()
+
+    def test_number_and_lines(self):
+        self.assertNotEquals(Linter.number_and_line(self.well_formatted), 0)
 
 if __name__ == '__main__':
     unittest.main()
