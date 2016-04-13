@@ -32,9 +32,14 @@ class TestLinter(unittest.TestCase):
             TestLinter.lint.report()
 
     def test_number_and_lines(self):
-        self.assertNotEquals(Linter.number_and_line(self.well_formatted), 0)
+        self.assertNotEquals(
+                len(Linter.number_and_line(self.well_formatted)),
+                0)
 
     def test_parseable_lines(self):
+        self.assertEquals(
+                len(Linter.parseable_lines(self.well_formatted)),
+                4)
 
 if __name__ == '__main__':
     unittest.main()
