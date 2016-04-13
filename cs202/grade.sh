@@ -62,22 +62,7 @@ rm $STUDENT_REPORT
 source $GRADING_HOME/fragments/compile.sh
 
 ## Destructors deallocate all dynamic memory
-LOG_FILE="$WORKING_DIRECTORY/valgrind_output.txt"
-echo "Checking for leaks..."
-# check if the program leaks any
-if valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./a.out; then
-  # if there is, add the valgrind output to the file
-  echo "Valgrind encountered errors, dumping output to $LOG_FILE..."
-  if [[ $? == 2 ]]; then
-    ERR_CODE="## Destructors did not deallocate all dynamic memory"
-  else
-    ERR_CODE="## Program did not complete successfully due to runtime errors"
-  fi
-  echo -e "$ERR_CODE\nFrom valgrind:" > $STUDENT_REPORT
-  cat $LOG_FILE >> $STUDENT_REPORT
-fi
-
-rm $LOG_FILE
+source $GRADING_HOME/fragments/leak-check.sh a.out
 
 # Check for style
 LIB_DIR=$GRADING_HOME/lib
