@@ -16,4 +16,4 @@ class StaticMemberLinterTest(TestCase):
         self.assertEquals(len(StaticMemberLinter.parseable_lines(self.well_formatted)),
                 s[1].lint(self.well_formatted))
         self.assertNotEquals(s[0].offenses(), s[1].offenses())
-        self.assertEquals(1, s[0])
+        self.assertEquals(1, s[0].offenses())

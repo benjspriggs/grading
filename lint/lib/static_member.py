@@ -13,11 +13,11 @@ class StaticMemberLinter(Linter):
             file_and_lines = Linter.parseable_lines(fn)
             count = len(file_and_lines)
             in_class = False
-            for pair in file_and_lines:
+            for filenum, line in file_and_lines:
                 if not in_class:
-                    file_and_lines.remove(pair)
+                    file_and_lines.remove((filenum, line))
                 else:
-                    in_class = Linter.has(class_declaration, pair[1]) is not None
+                    in_class = Linter.has(class_declaration, line) is not None
             self.offense_list[str(fn)] = file_and_lines
             return count
         return 0
