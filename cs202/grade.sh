@@ -59,15 +59,7 @@ done
 rm $STUDENT_REPORT
 
 ## Program must compile
-# run the makefile with default target
-echo "Compiling $NAME\..."
-echo -e "## Compilation Output" >> $STUDENT_REPORT
-make compile 2> >(tee -a $STUDENT_REPORT >&2)
-
-if [ $? -ne 0 ]; then
-  echo -e "## Program did not compile\n$(cat $STUDENT_REPORT)" | tee -a $STUDENT_REPORT
-  exit
-fi
+source $GRADING_HOME/fragments/compile.sh
 
 ## Destructors deallocate all dynamic memory
 LOG_FILE="$WORKING_DIRECTORY/valgrind_output.txt"
