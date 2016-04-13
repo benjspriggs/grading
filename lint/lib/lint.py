@@ -34,7 +34,8 @@ class Linter(object):
     # Return a list of tuples, (filenumber, "line")
     @staticmethod
     def number_and_line(fn):
-        return [x for x in enumerate(open(fn, 'rb').read().splitlines())]
+        return [x for x in enumerate(
+            [line.rstrip() for line in open(fn, 'rb').read().splitlines()])]
 
     # Return a list of tuples, (filenumber, "line")
     # that are all not:
