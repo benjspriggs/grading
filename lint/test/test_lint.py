@@ -14,7 +14,8 @@ class TestLinter(unittest.TestCase):
 
     def test_has(self):
         self.assertTrue(Linter.has("something", "something"))
-        self.assertFalse(Linter.has("something", "//something"))
+        self.assertTrue(Linter.has(".*", "//something"))
+        self.assertFalse(Linter.has("asdf", "jsd"))
 
     def test_lint(self):
         with self.assertRaises(NotImplementedError):

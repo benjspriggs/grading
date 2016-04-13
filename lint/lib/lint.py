@@ -18,10 +18,10 @@ class Linter(object):
     def report(self):
         raise NotImplementedError()
 
-    # Return if this line has a pattern and is not a line comment
+    # Return if this line has a pattern
     @staticmethod
     def has(pattern, line):
-        return re.search(pattern, line) and not re.search(Linter.line_comment, line)
+        return re.search(pattern, line) is not None
 
     # Return if a filename is lintable (based on its filename)
     @staticmethod
@@ -32,3 +32,20 @@ class Linter(object):
     @staticmethod
     def number_and_line(fn):
         return [x for x in enumerate(open(fn, 'rb').read().splitlines())]
+
+    # Return a list of tuples, (filenumber, "line")
+    # that are all not:
+    #   line comments
+    #   block comments
+    @staticmethod
+    def parseable_lines(fn):
+        no_line = filter(lambda x: not Linter.has(Linter.line_comment, x[1]), Linter.number_and_line(fn))
+        in_comment = False
+        for pair in no_line:
+            if in_comment:
+                no_line.remove(pair)
+            if Linter.has(r"\/\*", pair[1]):
+                in_comment = True
+            if Linter.has(r"\*\/", pair[1]):
+                in_comment = False
+        return no_line
