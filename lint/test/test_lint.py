@@ -37,7 +37,7 @@ class TestLinter(unittest.TestCase):
 
     def test_parseable_lines(self):
         self.assertEquals(
-                len(Linter.parseable_lines(self.well_formatted)), 4)
+                len(Linter.parseable_lines(self.well_formatted)), 6)
 
 if __name__ == '__main__':
     unittest.main()
