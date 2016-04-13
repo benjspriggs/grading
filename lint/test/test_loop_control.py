@@ -9,7 +9,7 @@ class LoopControlLinterTest(TestCase):
     has_while_file_bad = "test/fixtures/has-forever-while-bad-format.cpp"
 
     def test_lint(self):
-        self.assertNotEquals(sum(1 for line in open(self.has_while_file, 'rb')),
+        self.assertNotEquals(LoopControlLinter.parseable_lines(self.has_while_file),
                 LoopControlLinter().lint(self.has_while_file))
 
     def test_offenses(self):
