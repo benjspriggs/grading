@@ -6,9 +6,6 @@ from lint import *
 
 class LoopControlLinter(Linter):
     forever_while = re.compile(r"while\s?\((-?[1-9]+|true)?\)")
-    def __init__(self):
-        self.offense_list = []
-
     def lint(self, fn):
         if Linter.is_lintable(fn):
             file_and_lines = Linter.parseable_lines(fn)

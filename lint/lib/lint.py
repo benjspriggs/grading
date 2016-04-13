@@ -6,6 +6,9 @@ import re
 
 class Linter(object):
     line_comment = re.compile(r"^\s?//")
+
+    def __init__(self):
+        self.offense_list = []
     # Take a file and lint it
     # return the number of lines processed in the file
     def lint(self, fn):
@@ -42,7 +45,7 @@ class Linter(object):
         no_line = filter(lambda x: not Linter.has(Linter.line_comment, x[1]),
                Linter.number_and_line(fn))
         in_comment = False
-        for pair in no_line:
+        for pair in no_line: # TODO find the proper functional way to do this
             if in_comment:
                 no_line.remove(pair)
             if Linter.has(r"\/\*", pair[1]):
