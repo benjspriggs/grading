@@ -6,7 +6,7 @@
 
 WORKING_DIRECTORY=$(pwd)
 SCRIPT_SOURCE=$(readlink -f $0)
-GRADING_HOME=${SCRIPT_SOURCE%%/cs202/grade.sh}
+GRADING_HOME=${SCRIPT_SOURCE%%/cs163/grade.sh}
 HELP_MSG="Usage: grade [student-dir] [--help]
 This script takes a student's folder name and runs through automated grading operations for PSU CS163.
 It will dump out a text file with:
