@@ -33,7 +33,7 @@ fi
 ## Program must compile
 source $GRADING_HOME/fragments/compile.sh a.out
 ## Program must not have any run-time faults
-source $GRADING_HOME/fragmets/no-runtime-errors.sh a.out
+source $GRADING_HOME/fragments/no-runtime-errors.sh a.out
 ## Functions must be fewer than 30 lines of code
 # TODO Add line checker
 
