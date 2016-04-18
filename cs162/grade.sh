@@ -38,7 +38,6 @@ source $GRADING_HOME/fragmets/no-runtime-errors.sh a.out
 # TODO Add line checker
 
 # open up all of their files in vim to check for formatting and add any additional notes
-echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 source $GRADING_HOME/fragments/manual-check.sh
 
 # finish execution

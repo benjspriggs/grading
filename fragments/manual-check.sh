@@ -4,6 +4,7 @@
 # in the current directory,
 # and a copy of the STUDENT_REPORT
 
+echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 # TODO add some way to process comment density?
 if ls -l *.h > /dev/null 2>&1;then
   vim -p *.h $STUDENT_REPORT

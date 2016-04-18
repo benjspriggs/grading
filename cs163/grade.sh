@@ -34,7 +34,6 @@ source $GRADING_HOME/fragments/compile.sh a.out
 source $GRADING_HOME/fragments/leak-check.sh a.out
 
 # manually check for everything else
-echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 source $GRADING_HOME/fragments/manual-check.sh
 
 # finish execution
