@@ -7,6 +7,7 @@
 WORKING_DIRECTORY=$(pwd)
 SCRIPT_SOURCE=$(readlink -f $0)
 GRADING_HOME=${SCRIPT_SOURCE%%/cs202/grade.sh}
+LIB_DIR=$GRADING_HOME/lib
 HELP_MSG="Usage: grade [student-dir] [--help]
 This script takes a student's folder name and runs through automated grading operations for PSU CS202.
 It will dump out a text file with:
@@ -15,15 +16,9 @@ It will dump out a text file with:
   other notes
 in the current working directory ($WORKING_DIRECTORY)."
 
+source $GRADING_HOME/fragments/help.sh
 
-# display help message if requested
-for arg in $@; do
-  if [ [$arg] == ["--help"] -o [$arg] == ["-h"] ]; then
-    echo "$HELP_MSG"
-    exit 0
-  fi
-done
-
+# make sure we have all the arguments
 if [[ -z "$1" || ! -d "$1" ]]; then
   echo "$HELP_MSG"
   exit 1
@@ -65,48 +60,19 @@ done
 rm $STUDENT_REPORT
 
 ## Program must compile
-# run the makefile with default target
-echo "Compiling $NAME\..."
-echo -e "## Compilation Output" >> $STUDENT_REPORT
-make compile 2> >(tee -a $STUDENT_REPORT >&2)
-
-if [ $? -ne 0 ]; then
-  echo -e "## Program did not compile\n$(cat $STUDENT_REPORT)" | tee -a $STUDENT_REPORT
-  exit
-fi
+source $GRADING_HOME/fragments/compile.sh a.out
 
 ## Destructors deallocate all dynamic memory
-LOG_FILE="$WORKING_DIRECTORY/valgrind_output.txt"
-echo "Checking for leaks..."
-# check if the program leaks any
-if valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./a.out; then
-  # if there is, add the valgrind output to the file
-  echo "Valgrind encountered errors, dumping output to $LOG_FILE..."
-  if [[ $? == 2 ]]; then
-    ERR_CODE="## Destructors did not deallocate all dynamic memory"
-  else
-    ERR_CODE="## Program did not complete successfully due to runtime errors"
-  fi
-  echo -e "$ERR_CODE\nFrom valgrind:" > $STUDENT_REPORT
-  cat $LOG_FILE >> $STUDENT_REPORT
-fi
-
-rm $LOG_FILE
+source $GRADING_HOME/fragments/leak-check.sh a.out
 
 # Check for code requirements 
 LIB_DIR=$GRADING_HOME/lib
 echo "Checking obvious code errors..."
 python $LIB_DIR/cs202_code.py *.h *.cpp | tee -a $STUDENT_REPORT
 
-echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 # open up all of their files in vim to check for formatting and add any additional notes
-# TODO add some way to process comment density?
-if ls -l *.h > /dev/null 2>&1;then
-  vim -p *.h $STUDENT_REPORT
-fi
-if ls -l *.cpp > /dev/null 2>&1; then
-  vim -p *.cpp $STUDENT_REPORT
-fi
+echo "Manually checking for comments, headers, whitespacing and other details in source files..."
+source $GRADING_HOME/fragments/manual-check.sh
 
 # finish execution
 echo "Anonymizing $STUDENT_REPORT..."
