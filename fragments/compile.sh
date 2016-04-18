@@ -16,6 +16,6 @@ g++ *.cpp -g -Wall -o $1 2> >(tee -a $STUDENT_REPORT >&2)
 
 if [ $? -ne 0 ]; then
   echo "## Program did not compile" >> cat $STUDENT_REPORT
-  exit
+  exit 1
 fi
 

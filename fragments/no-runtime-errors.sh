@@ -13,6 +13,6 @@ fi
 
 if [ $? -ne 0 ]; then
   echo "## Program ran with runtime faults" >> $STUDENT_REPORT
-  exit
+  exit 1
 fi
 
