@@ -5,6 +5,7 @@
 
 # make sure we have all the arguments
 if [[ -z "$1" ]]; then
+  echo "Need executable as argument: $(readlink -f $0) <filename>"
   exit 1
 fi
 
