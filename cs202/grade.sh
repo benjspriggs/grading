@@ -3,7 +3,7 @@
 # Script to automatedly grade a student's homework
 # Runs through a series of checks, and puts output to a file
 # author :: Benjamin Spriggs
-
+set -x
 WORKING_DIRECTORY=$(pwd)
 SCRIPT_SOURCE=$(readlink -f $0)
 GRADING_HOME=${SCRIPT_SOURCE%%/cs202/grade.sh}
