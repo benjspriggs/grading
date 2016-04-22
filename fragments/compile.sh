@@ -13,7 +13,7 @@ fi
 # Compile with all errors enabled
 echo "Compiling $NAME\..."
 echo "## Compilation Output" >> $STUDENT_REPORT
-g++ *.cpp -g -Wall -o $1 2> >(tee -a $STUDENT_REPORT >&2)
+$(g++ *.cpp -g -Wall -o $1) 2> >(tee -a $STUDENT_REPORT >&2)
 
 if [ $? -ne 0 ]; then
   echo "## Program did not compile" >> cat $STUDENT_REPORT
