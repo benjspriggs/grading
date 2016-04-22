@@ -12,5 +12,5 @@ class GlobalVariableLinterTest(TestCase):
     def test_lint(self):
         g = GlobalVariableLinter()
         self.assertEquals(len(GlobalVariableLinter.parseable_lines(self.has_global)),
-                g.lint(self.has_global))
+                len(g.lint(self.has_global)))
         self.assertEquals(1, g.offenses())
