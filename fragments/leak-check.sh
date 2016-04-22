@@ -6,7 +6,8 @@
 # then appended to a student's report
 
 # make sure we have all the arguments
-if [[ -z "$1" || ! -d "$1" ]]; then
+if [[ -z "$1" || ! -x "$1" ]]; then
+  echo "$1 is not executable, terminating..."
   exit 1
 fi
 
