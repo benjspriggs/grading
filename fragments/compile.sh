@@ -16,7 +16,7 @@ echo "## Compilation Output" >> $STUDENT_REPORT
 g++ *.cpp -g -Wall -o $1 2>&1 | tee -a $STUDENT_REPORT
 
 if [ ${PIPESTATUS[0]} -ne 0 ]; then
-  echo "## Program did not compile" >> cat $STUDENT_REPORT
+  echo "## Program did not compile" >> $STUDENT_REPORT
   exit 1
 fi
 
