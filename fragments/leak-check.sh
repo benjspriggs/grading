@@ -14,7 +14,8 @@ fi
 LOG_FILE="$WORKING_DIRECTORY/valgrind_output.txt"
 echo "Checking for leaks..."
 # check if the program leaks any
-if valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./$1; then
+valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./$1
+if [ $? -neq 0 ]; then
   # if there is, add the valgrind output to the file
   echo "Valgrind encountered errors, dumping output to $LOG_FILE..."
   if [[ $? == 2 ]]; then
