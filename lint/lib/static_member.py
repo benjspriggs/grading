@@ -14,10 +14,12 @@ class StaticMemberLinter(Linter):
             count = len(file_and_lines)
             in_class = False
             for filenum, line in file_and_lines:
-                if not in_class:
+                if Linter.has(self.class_declaration, line):
+                    in_class = True
+                elif Linter.has(r"}", line):
+                    in_class = False
+                elif not in_class:
                     file_and_lines.remove((filenum, line))
-                else:
-                    in_class = Linter.has(class_declaration, line) is not None
             self.offense_list[str(fn)] = file_and_lines
             return count
         return 0
