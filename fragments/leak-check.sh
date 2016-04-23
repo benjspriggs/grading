@@ -6,14 +6,16 @@
 # then appended to a student's report
 
 # make sure we have all the arguments
-if [[ -z "$1" || ! -d "$1" ]]; then
+if [[ -z "$1" || ! -x "$1" ]]; then
+  echo "$1 is not executable, terminating..."
   exit 1
 fi
 
 LOG_FILE="$WORKING_DIRECTORY/valgrind_output.txt"
 echo "Checking for leaks..."
 # check if the program leaks any
-if valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./$1; then
+valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./$1
+if [ $? -neq 0 ]; then
   # if there is, add the valgrind output to the file
   echo "Valgrind encountered errors, dumping output to $LOG_FILE..."
   if [[ $? == 2 ]]; then
