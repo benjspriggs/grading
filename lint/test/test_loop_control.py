@@ -16,7 +16,7 @@ class LoopControlLinterTest(TestCase):
         self.assertEquals(len(LoopControlLinter.parseable_lines(self.well_formatted)),
                 l[1].lint(self.well_formatted))
         self.assertNotEquals(l[0].offenses(), l[1].offenses())
-        self.assertEquals(l[1].offenses())
+        self.assertEquals(0, l[1].offenses())
 
     def test_offenses(self):
         l = LoopControlLinter()
