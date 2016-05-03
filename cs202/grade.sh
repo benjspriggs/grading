@@ -71,7 +71,6 @@ echo "Checking obvious code errors..."
 python $LIB_DIR/cs202_code.py *.h *.cpp | tee -a $STUDENT_REPORT
 
 # open up all of their files in vim to check for formatting and add any additional notes
-echo "Manually checking for comments, headers, whitespacing and other details in source files..."
 source $GRADING_HOME/fragments/manual-check.sh
 
 # finish execution

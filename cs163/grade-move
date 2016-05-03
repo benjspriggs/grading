@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# grade-move
+
+source $GIT_HOME/grading/grade-move.sh
