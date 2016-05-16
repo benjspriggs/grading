@@ -75,7 +75,7 @@ if [[ -e $MAKEFILE && -e $ARCHIVE ]]; then
     tar xvf $ARCHIVE -C $NAME
   elif [[ "$ARCHIVE" =~ \.bz2$ ]]; then
     tar jxvf $ARCHIVE -C $NAME
-  elif [[ "$ARCHIVE" =~ \.gz$ ]]; then
+  elif [[ "$ARCHIVE" =~ \.gz$ || "$ARCHIVE" =~ \.tgz ]]; then
     tar zxvf $ARCHIVE -C $NAME
   elif [[ "$ARCHIVE" =~ \.rar$ ]]; then
     unrar e $ARCHIVE $NAME
