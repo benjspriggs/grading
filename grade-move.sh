@@ -40,8 +40,8 @@ for arg in $@; do
   fi
 done
 
-NAME=$1 # name of the individual, folder where the extracted contents will go
-ARCHIVE=$2 # archive name
+NAME="\"$1\"" # name of the individual, folder where the extracted contents will go
+ARCHIVE="\"$2\"" # archive name
 
 put_makefile_in_dir() {
   count=$(ls -l *.cpp 2>/dev/null | wc -l)
