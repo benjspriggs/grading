@@ -30,7 +30,7 @@ for file in "${FILES_TO_LINT[@]}"; do
     break
   fi
 
-  if [ ! -f $file ]; then
+  if [ ! -f $file.cpp ]; then
     echo "File $file does not exist!"
     break
   fi
@@ -40,7 +40,7 @@ for file in "${FILES_TO_LINT[@]}"; do
   if [ ! -z $globals ]; then
     # get names and such of variables
     echo -e "Found $globals in $file...
-    $(g++ -O0 -c B.cpp && nm B.o | egrep ' [A-Z] ' | egrep -v ' [UTW] ')" \\
+    $(g++ -O0 -c $file.cpp && nm $file.o | egrep ' [A-Z] ' | egrep -v ' [UTW] ')" \\
       >> $STUDENT_REPORT
   fi
 done

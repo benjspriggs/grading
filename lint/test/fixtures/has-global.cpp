@@ -1,7 +1,8 @@
 #include <iostream>
 
 const int SIZE = 40; // This should not give an error
-int d = 2; // This should
+int d; // This should
+int k; // And this
 
 int main( void )
 {
