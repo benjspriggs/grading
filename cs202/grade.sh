@@ -65,7 +65,11 @@ source $GRADING_HOME/fragments/compile.sh a.out
 ## Destructors deallocate all dynamic memory
 source $GRADING_HOME/fragments/leak-check.sh a.out
 
-# Check for code requirements 
+## Check for code requirements
+# Check for globals
+# TODO: Find better way to find all of the .cpp files
+source $GRADING_HOME/fragments/count-globals.sh *.cpp
+
 LIB_DIR=$GRADING_HOME/lib
 echo "Checking obvious code errors..."
 python $LIB_DIR/cs202_code.py *.h *.cpp | tee -a $STUDENT_REPORT

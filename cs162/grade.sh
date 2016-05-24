@@ -37,6 +37,14 @@ source $GRADING_HOME/fragments/no-runtime-errors.sh a.out
 ## Functions must be fewer than 30 lines of code
 # TODO Add line checker
 
+# Check for code requirements
+LIB_DIR=$GRADING_HOME/lib
+echo "Checking obvious code errors..."
+python $LIB_DIR/cs162_code.py *.h *.cpp | tee -a $STUDENT_REPORT
+# check for globals and such
+# TODO: Find a better way to find all of the .cpp files
+source $GRADING_HOME/fragments/count-globals.sh *.cpp
+
 # open up all of their files in vim to check for formatting and add any additional notes
 source $GRADING_HOME/fragments/manual-check.sh
 
