@@ -11,7 +11,13 @@ class GlobalVariableLinter(Linter):
     def lint(self, fn):
         if Linter.is_lintable(fn):
             file_and_lines = Linter.parseable_lines(fn)
-            count = len(Linter.parseable_lines(fn))
-            self.offense_list[str(fn)] = filter(lambda (n, l): Linter.has(GlobalVariableLinter.has_var, l), file_and_lines)
-            return count 
-        return 0
+        count = len(Linter.parseable_lines(fn))
+        self.offense_list[str(fn)] = _all_variables(file_and_lines)
+        return count 
+    return 0
+
+    def _all_variables(fl_list):
+        return filter(lambda (n, l):
+                Linter.has(GlobalVariableLinter, l),
+                fl_list)
+
