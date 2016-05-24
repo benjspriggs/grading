@@ -36,7 +36,7 @@ source $GRADING_HOME/fragments/leak-check.sh a.out
 ## Check for style requirements
 LIB_DIR=$GRADING_HOME/lib
 echo "Checking obvious code errors..."
-python $LIB_DIR/cs162_code.py *.h *.cpp | tee -a $STUDENT_REPORT
+python $LIB_DIR/cs163_code.py *.h *.cpp | tee -a $STUDENT_REPORT
 # check for globals and such
 # TODO: Find a better way to find all of the .cpp files
 source $GRADING_HOME/fragments/count-globals.sh *.cpp
