@@ -39,11 +39,13 @@ if [[ ${#FILES_TO_LINT[@]} != 0 ]]; then
     # count the number of global variables
     # NM puts global constants in the B, D, G sections
     globals=$( g++ -O0 -c $file.cpp && nm $file.o | grep ' [B,D,G] ' | wc -l )
+    rm $file.o
     if [[ $globals -gt 0 ]]; then
       # get names and such of variables
       echo -e "Found $globals global variables in $file..." | tee -a $STUDENT_REPORT
       echo "$file.cpp::" >> $STUDENT_REPORT
       echo "$(g++ -O0 -c $file.cpp && nm $file.o | egrep ' [A-Z] ' | egrep -v ' [UTW] ')" >> $STUDENT_REPORT
+      rm $file.o
     fi
 done
 fi

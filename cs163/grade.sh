@@ -34,7 +34,7 @@ source $GRADING_HOME/fragments/compile.sh a.out
 source $GRADING_HOME/fragments/leak-check.sh a.out
 
 ## Check for style requirements
-LIB_DIR=$GRADING_HOME/lint/lib
+LIB_DIR=$GRADING_HOME/lint
 echo "Checking obvious code errors..."
 python $LIB_DIR/cs163_code.py *.h *.cpp | tee -a $STUDENT_REPORT
 # check for globals and such

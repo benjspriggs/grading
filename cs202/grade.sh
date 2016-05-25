@@ -7,7 +7,7 @@
 WORKING_DIRECTORY=$(pwd)
 SCRIPT_SOURCE=$(readlink -f $0)
 GRADING_HOME=${SCRIPT_SOURCE%%/cs202/grade.sh}
-LIB_DIR=$GRADING_HOME/lint/lib
+LIB_DIR=$GRADING_HOME/lint
 HELP_MSG="Usage: grade [student-dir] [--help]
 This script takes a student's folder name and runs through automated grading operations for PSU CS202.
 It will dump out a text file with:
@@ -70,7 +70,6 @@ source $GRADING_HOME/fragments/leak-check.sh a.out
 # TODO: Find better way to find all of the .cpp files
 source $GRADING_HOME/fragments/count-globals.sh *.cpp
 
-LIB_DIR=$GRADING_HOME/lib
 echo "Checking obvious code errors..."
 python $LIB_DIR/cs202_code.py *.h *.cpp | tee -a $STUDENT_REPORT
 
