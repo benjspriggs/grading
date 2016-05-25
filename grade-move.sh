@@ -71,12 +71,8 @@ if [[ -e $MAKEFILE && -e $ARCHIVE ]]; then
   echo "Extracting archive $ARCHIVE..."
   if [[ "$ARCHIVE" =~ \.zip$ ]]; then
     unzip $ARCHIVE -d $NAME
-  elif [[ "$ARCHIVE" =~ \.tar$ ]]; then
+  elif [[ "$ARCHIVE" =~ \.tar || $"$ARCHIVE" =~ \.gz$ || "$ARCHIVE" =~ \.tgz || "$ARCHIVE" =~ \.bz2$ ]]; then
     tar xvf $ARCHIVE -C $NAME
-  elif [[ "$ARCHIVE" =~ \.bz2$ ]]; then
-    tar jxvf $ARCHIVE -C $NAME
-  elif [[ "$ARCHIVE" =~ \.gz$ || "$ARCHIVE" =~ \.tgz ]]; then
-    tar zxvf $ARCHIVE -C $NAME
   elif [[ "$ARCHIVE" =~ \.rar$ ]]; then
     unrar e $ARCHIVE $NAME
   else
