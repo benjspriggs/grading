@@ -33,6 +33,14 @@ source $GRADING_HOME/fragments/compile.sh a.out
 ## Program must run without runtime faults, and not leak
 source $GRADING_HOME/fragments/leak-check.sh a.out
 
+## Check for style requirements
+LIB_DIR=$GRADING_HOME/lint/lib
+echo "Checking obvious code errors..."
+python $LIB_DIR/cs163_code.py *.h *.cpp | tee -a $STUDENT_REPORT
+# check for globals and such
+# TODO: Find a better way to find all of the .cpp files
+source $GRADING_HOME/fragments/count-globals.sh *.cpp
+
 # manually check for everything else
 source $GRADING_HOME/fragments/manual-check.sh
 

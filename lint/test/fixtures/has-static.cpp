@@ -1,4 +1,5 @@
 // has-static.cpp
+// this file has 1 offense
 
 class StaticMemberClass
 {
@@ -6,7 +7,7 @@ class StaticMemberClass
 		void something( void );
 	private:
 		int staticArray[23];
-}
+};
 
 int main(void)
 {

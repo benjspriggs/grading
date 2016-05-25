@@ -14,7 +14,7 @@
 - [ ] Check for conventions being met for variables, constant, function names:
 	- [ ] No capitalized or upper case variables
 	- [ ] Single letter vairable names for loop control variables (May be difficult to implement?)
-- [ ] Use of gotos and global variables not allowed (GLOBAL CONSTANTS OKAY)
+- [x] Use of gotos and global variables not allowed (GLOBAL CONSTANTS OKAY)
 - [ ] No breaks within loops
 - [ ] No returns from a function within a loop
 - [ ] All variable definitions must be before the executable statements of main/ each function (clarify?)
@@ -66,14 +66,13 @@
 
 ## Style requirements
 - [ ] Consistent style of indentation
-- [ ] No global variables
+- [x] No global variables
 - [ ] No use of exit, continue, break to alter control flow loops
 - [ ] No while(1) loops or while(true) loops
 - [ ] No use of the std::string class (EXCEPT IN LATER ASSIGNMENTS)
 - [ ] Each file has name of the file, student, class number in header at top of the file
 - [ ] Comments use correct spelling and grammar
 - [ ] No gotos
-- [ ] No global variables
 - [ ] All variable declarations happen before main()
 - [ ] Blank space after each function
 - [ ] Space after , . < > << >> + * / -
