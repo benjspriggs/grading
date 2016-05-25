@@ -38,7 +38,7 @@ source $GRADING_HOME/fragments/no-runtime-errors.sh a.out
 # TODO Add line checker
 
 # Check for code requirements
-LIB_DIR=$GRADING_HOME/lint/lib
+LIB_DIR=$GRADING_HOME/lint
 echo "Checking obvious code errors..."
 python $LIB_DIR/cs162_code.py *.h *.cpp | tee -a $STUDENT_REPORT
 # check for globals and such
