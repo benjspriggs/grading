@@ -23,7 +23,6 @@
 - [ ] Blank space required between words in a line
 - [ ] Blank space after each comma, and after * / + - = << >>
 - [ ] Indent each line of the program except for the curly braces that mark the beginning and end (TWO HARD SPACES MINIMUM, CONSISTENTLY)
-
 - [ ] Blank lines required between sections of program
 - [ ] Curly braces always appear on line after conditional in if, switch
 - [ ] Switch statement lables appear on same line of first statement
