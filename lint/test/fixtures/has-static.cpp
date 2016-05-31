@@ -12,4 +12,5 @@ class StaticMemberClass
 int main(void)
 {
 	return 0;
+        ;
 }
