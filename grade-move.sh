@@ -56,11 +56,11 @@ put_makefile_in_dir() {
 
 go_to_dir_with_cpp() {
   for file in *; do
-    if [ -d $file ]; then
+    if [ -d "$file" ]; then
       if [ $(ls -l *.cpp 2>/dev/null | wc -l) -gt 1 ]; then
        break
       fi
-      cd $file
+      cd "$file"
     fi
   done
 }
