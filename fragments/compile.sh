@@ -4,18 +4,24 @@
 # puts the executable into the first argument,
 # dumps errors and such into STUDENT_REPORT
 
-# make sure we have all the arguments
-if [[ -z "$1" ]]; then
-  echo "Need executable as argument: $(readlink -f $0) <filename>"
+die() {
+  echo "Need output executable as argument: $0 <output>" &>2
   exit 1
-fi
+}
 
-# Compile with all errors enabled
-echo "Compiling $NAME\..."
-echo -e "\t\t## Compilation Output" >> $STUDENT_REPORT
-g++ *.cpp -g -Wall -o $1 2>&1 | tee -a $STUDENT_REPORT
+usage() {
+  echo "Usage: $0 <output> ..."
+  exit 0
+}
 
-if [ ${PIPESTATUS[0]} -ne 0 ]; then
-  echo -e "## Program did not compile\n$(cat $STUDENT_REPORT)" | tee -a $STUDENT_REPORT
-fi
+compile_strict() {
+  # Compile with all errors enabled
+  echo "Compiling $NAME\..."
+  echo -e "\t\t## Compilation Output" >> $STUDENT_REPORT
+  g++ *.cpp -g -Wall -o $1 2>&1 | tee -a $STUDENT_REPORT
+  if [ ${PIPESTATUS[0]} -ne 0 ]; then
+    echo -e "## Program did not compile\n$(cat $STUDENT_REPORT)" | tee -a $STUDENT_REPORT
+  fi
+}
+
 
