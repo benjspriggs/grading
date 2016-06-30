@@ -14,6 +14,7 @@ It will dump out a text file with:
 in the current working directory ($WORKING_DIRECTORY)."
 
 source $GRADING_HOME/fragments/help.sh
+display_help_and_exit
 
 # make sure we have all the arguments
 if [[ -z "$1" || ! -d "$1" ]]; then
