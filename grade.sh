@@ -4,7 +4,13 @@
 
 SCRIPT_NAME=$(readlink -f $0)
 GRADING_HOME=${SCRIPT_NAME%/*}
+
 source $GRADING_HOME/fragments/common.sh
+source $GRADING_HOME/fragments/compile.sh
+source $GRADING_HOME/fragments/count-globals.sh
+source $GRADING_HOME/fragments/leak-check.sh
+source $GRADING_HOME/fragments/manual-check.sh
+source $GRADING_HOME/fragments/no-runtime-errors.sh
 
 usage="$0 <class> <dirname>"
 # usage block
