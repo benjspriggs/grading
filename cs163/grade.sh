@@ -41,7 +41,8 @@ echo "Checking obvious code errors..."
 python $LIB_DIR/cs163_code.py *.h *.cpp | tee -a $STUDENT_REPORT
 # check for globals and such
 # TODO: Find a better way to find all of the .cpp files
-source $GRADING_HOME/fragments/count-globals.sh *.cpp
+source $GRADING_HOME/fragments/count-globals.sh 
+count_globals $STUDENT_REPORT *.cpp
 
 # manually check for everything else
 source $GRADING_HOME/fragments/manual-ch
