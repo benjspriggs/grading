@@ -21,7 +21,6 @@ class="$1"
 name="$2"
 full_name="$(readlink -e $name)"
 
-GRADING_HOME=${SCRIPT_SOURCE%/*}
 HELP_MSG="Usage: $usage
 This script takes a student's folder name and runs through automated grading operations for PSU $class
 It will dump out a text file with:
