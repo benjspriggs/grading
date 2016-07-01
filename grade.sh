@@ -4,14 +4,14 @@
 
 source fragments/common.sh
 
-usage="$0 <class> <name>"
+usage="$0 <class> <dirname>"
 # usage block
 {
   if [ -z "$1" ]; then
     die "Missing class" "$usage"
   fi
   if [ -z "$2" ]; then
-    die "Missing name" "$usage"
+    die "Missing folder name" "$usage"
   fi
 }
 
@@ -34,4 +34,4 @@ for arg in $@; do
   fi
 done
 
-source "$class"/grade.sh "$name"
+source "$class"/grade.sh "$name" "$GRADING_HOME"
