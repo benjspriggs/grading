@@ -24,8 +24,9 @@ leak_check() {
 
   local LOG_FILE="$PWD/valgrind_output.txt"
   echo "Checking for leaks..."
-  # check if the program leaks any
+
   valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./$1
+
   if [ $? -ne 0 ]; then
     # if there is, add the valgrind output to the file
     echo "Valgrind encountered errors, dumping output to $LOG_FILE..."
