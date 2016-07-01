@@ -37,4 +37,4 @@ for arg in $@; do
   fi
 done
 
-source "$class"/grade.sh "$full_name" "$GRADING_HOME"
+grade "$full_name" "$class" "$GRADING_HOME"
