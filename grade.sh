@@ -2,7 +2,8 @@
 # super-script
 # Does all the magic for grading
 
-source fragments/common.sh
+GRADING_HOME=$(readlink -f $0)
+source $GRADING_HOME/fragments/common.sh
 
 usage="$0 <class> <dirname>"
 # usage block
