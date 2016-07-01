@@ -5,10 +5,11 @@
 # dumps errors and such into STUDENT_REPORT
 
 compile_strict() {
-  if [ -z $0 ]; then
+  if [ -z $1 ]; then
     echo "Need output executable as argument: $0 <output>" &>2 
     exit 1
   fi
+
   # Compile with all errors enabled
   echo "Compiling $NAME\..."
   echo -e "\t\t## Compilation Output" >> $STUDENT_REPORT
