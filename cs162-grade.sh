@@ -8,6 +8,7 @@
 grade()
 {
   local WORKING_DIRECTORY=$(pwd)
+  local GRADING_HOME=${SCRIPT_SOURCE%/*}
   local HELP_MSG="Usage: grade [student-dir]
   This script takes a student's folder name and runs through automated grading operations for PSU CS162
   It will dump out a text file with:
@@ -20,17 +21,12 @@ grade()
   {
     if [[ -z "$1" || ! -d "$1" ]]; then
       die "Missing dirname or non-direcory given" $HELP_MSG
+      exit
     fi
   }
 
   local STUDENT_NAME="$1"
   local STUDENT_REPORT=$WORKING_DIRECTORY/${STUDENT_NAME%/}.txt
-
-  if [ ! -d $STUDENT_NAME ]; then
-    echo "Directory '$STUDENT_NAME' does not exist."
-    echo "$HELP_MSG"
-    exit 1
-  fi
 
   ## Program must compile
   source $GRADING_HOME/fragments/compile.sh
