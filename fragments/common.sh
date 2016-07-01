@@ -19,68 +19,40 @@ die () {
 }
 
 grade () {
-  local usage="grade <class> <student-dir>"
-
-  # usage block
-  {
-    if [ -z "$1" ]; then
-      die "Missing class" "$usage"
-    fi
-
-    if [ -z "$2" ]; then
-      die "Missing student dir" "$usage"
-    fi
-  }
-  local class="$1"
-  local folder="$2"
-
-  local WORKING_DIRECTORY=$(pwd)
-  local GRADING_HOME=${SCRIPT_SOURCE%/*}
-  local HELP_MSG="Usage: $usage
-  This script takes a student's folder name and runs through automated grading operations for PSU $class
-  It will dump out a text file with:
-    the student's name
-    any compile errors
-    other notes
-  in the current working directory ($WORKING_DIRECTORY)."
+  local usage="grade <student-dir> <class> <grading-directory>"
 
   # usage block
   {
     if [[ -z "$1" || ! -d "$1" ]]; then
-      die "Missing dirname or non-direcory given" $HELP_MSG
+      die "Missing student dirname or non-direcory given" "$usage"
+      exit
+    fi
+
+    if [ -z "$2" ]; then
+      die "Missing class" "$usage"
+    fi
+
+    if [[ -z "$3" || ! -d "$3" ]]; then
+      die "Missing grading directory or non-direcory given" "$usage"
       exit
     fi
   }
 
-  local STUDENT_NAME="$1"
-  local STUDENT_REPORT=$WORKING_DIRECTORY/${STUDENT_NAME%/}.txt
+  local class="$1"
+  local name="$2"
+  local grading_home="$3"
+  local report="$PWD/${name%/}.txt"
 
-  ## Program must compile
-  source $GRADING_HOME/fragments/compile.sh
-  compile_strict "$STUDENT_NAME" "$STUDENT_REPORT" a.out
-
-  ## Program must not have any run-time faults
-  source $GRADING_HOME/fragments/no-runtime-errors.sh a.out
-  ## Functions must be fewer than 30 lines of code
-  # TODO Add line checker
-
-  # Check for code requirements
-  LIB_DIR=$GRADING_HOME/lint
-  echo "Checking obvious code errors..."
-  python $LIB_DIR/cs162_code.py *.h *.cpp | tee -a $STUDENT_REPORT
-  # check for globals and such
-  # TODO: Find a better way to find all of the .cpp files
-  source $GRADING_HOME/fragments/count-globals.sh
-  count_globals $STUDENT_REPORT *.cpp
+  source "$GRADING_HOME/fragments/$class-code.sh"
+  source "$GRADING_HOME/fragments/$class-style.sh"
 
   # open up all of their files in vim to check for formatting and add any additional notes
   source $GRADING_HOME/fragments/manual-check.sh
 
   # finish execution
-  echo "Anonymizing $STUDENT_REPORT..."
-  sed -i -e "s:$(pwd):\.\.\.:g" $STUDENT_REPORT # anonymize the file paths
+  echo "Anonymizing $report..."
+  sed -i -e "s:$PWD:\.\.\.:g" $report # anonymize the file paths
+  sed -i -e "s:$(whoami):grader:g" $report # change identity
 
-  echo "Finished grading ${STUDENT_NAME%/} in $(pwd), returning to grading directory..."
-  cd $WORKING_DIRECTORY
-  echo "Done."
+  echo "Finished grading $name."
 }
