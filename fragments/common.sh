@@ -44,6 +44,8 @@ grade () {
   local grading_home="$3"
   local report="$PWD/${name%/}.txt"
 
+  pushd $PWD
+  cd "$long_name"
   if [[ $class =~ 162 ]]; then
     code_requirements_basic
   else
@@ -63,6 +65,7 @@ grade () {
   sed -i -e "s:$PWD:\.\.\.:g" $report # anonymize the file paths
   sed -i -e "s:$(whoami):grader:g" $report # change identity
 
+  popd
   echo "Finished grading $name."
 }
 
