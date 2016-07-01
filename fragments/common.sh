@@ -39,12 +39,21 @@ grade () {
   }
 
   local class="$1"
-  local name="$2"
+  local name="$(basename "$2")"
+  local long_name="$(readlink -f "$name")"
   local grading_home="$3"
   local report="$PWD/${name%/}.txt"
 
-  source "$GRADING_HOME/fragments/$class-code.sh"
-  source "$GRADING_HOME/fragments/$class-style.sh"
+  if [[ $class =~ 162 ]]; then
+    code_requirements_basic
+  else
+    code_requirements_full
+    if [[ $class =~ 163 ]]; then
+      python $LIB_DIR/cs163_code.py *.h *.cpp | tee -a $report
+    elif [[ $class =~ 202 ]]; then
+      python $LIB_DIR/cs202_code.py *.h *.cpp | tee -a $report
+    fi
+  fi
 
   # open up all of their files in vim to check for formatting and add any additional notes
   source $GRADING_HOME/fragments/manual-check.sh
@@ -55,4 +64,20 @@ grade () {
   sed -i -e "s:$(whoami):grader:g" $report # change identity
 
   echo "Finished grading $name."
+}
+
+code_requirements_basic() {
+  # CODE REQUIREMENTS:
+  # Program must compile
+  compile_strict "$name" "$report" a.out
+  # No global variables
+  count_globals "$report" *.cpp
+  # Program must not have any run-time faults
+  no_runtime_errors a.out "$report"
+}
+
+code_requirements_full() {
+  code_requirements_basic
+  #  Destructors must deallocate dynamic memory
+  leak_check a.out "$report"
 }
