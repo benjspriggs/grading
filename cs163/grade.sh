@@ -29,7 +29,8 @@ STUDENT_NAME=$1
 STUDENT_REPORT=$WORKING_DIRECTORY/${STUDENT_NAME%/}.txt
 
 ## Program must compile
-source $GRADING_HOME/fragments/compile.sh a.out
+source $GRADING_HOME/fragments/compile.sh
+compile_strict "$STUDENT_NAME" "$STUDENT_REPORT" a.out
 
 ## Program must run without runtime faults, and not leak
 source $GRADING_HOME/fragments/leak-check.sh a.out
@@ -43,7 +44,7 @@ python $LIB_DIR/cs163_code.py *.h *.cpp | tee -a $STUDENT_REPORT
 source $GRADING_HOME/fragments/count-globals.sh *.cpp
 
 # manually check for everything else
-source $GRADING_HOME/fragments/manual-check.sh
+source $GRADING_HOME/fragments/manual-ch
 
 # finish execution
 echo "Anonymizing $STUDENT_REPORT..."

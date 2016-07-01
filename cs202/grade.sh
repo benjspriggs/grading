@@ -61,7 +61,8 @@ done
 rm $STUDENT_REPORT
 
 ## Program must compile
-source $GRADING_HOME/fragments/compile.sh a.out
+source $GRADING_HOME/fragments/compile.sh
+compile_strict "$STUDENT_NAME" "$STUDENT_REPORT" a.out
 
 ## Destructors deallocate all dynamic memory
 source $GRADING_HOME/fragments/leak-check.sh a.out
