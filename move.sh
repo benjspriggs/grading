@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # An automated moving and makefile-adding script for CS202
-# author :: Benjamin Spriggs
 
 HELP_MSG="Usage: grade (--help) name [archive]
 This script takes an archive, opens it, adds a default makefile for general use,
