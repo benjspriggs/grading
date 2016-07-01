@@ -2,7 +2,8 @@
 # super-script
 # Does all the magic for grading
 
-GRADING_HOME=$(readlink -f $0)
+SCRIPT_NAME=$(readlink -f $0)
+GRADING_HOME=${SCRIPT_NAME%/*}
 source $GRADING_HOME/fragments/common.sh
 
 usage="$0 <class> <dirname>"
