@@ -10,16 +10,17 @@ usage="$0 <class> <dirname>"
   if [ -z "$1" ]; then
     die "Missing class" "$usage"
   fi
-  if [ -z "$2" ]; then
+  if [[ -z "$2" || ! -d "$2" ]]; then
     die "Missing folder name" "$usage"
   fi
 }
 
-local class="$1"
-local name="$2"
+class="$1"
+name="$2"
+full_name="$(readlink -e $name)"
 
-local GRADING_HOME=${SCRIPT_SOURCE%/*}
-local HELP_MSG="Usage: $usage
+GRADING_HOME=${SCRIPT_SOURCE%/*}
+HELP_MSG="Usage: $usage
 This script takes a student's folder name and runs through automated grading operations for PSU $class
 It will dump out a text file with:
   the student's name
@@ -34,4 +35,4 @@ for arg in $@; do
   fi
 done
 
-source "$class"/grade.sh "$name" "$GRADING_HOME"
+source "$class"/grade.sh "$full_name" "$GRADING_HOME"
