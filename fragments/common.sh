@@ -38,9 +38,9 @@ grade () {
     fi
   }
 
-  local class="$1"
-  local name="$(basename "$2")"
+  local name="$(basename "$1")"
   local long_name="$(readlink -f "$name")"
+  local class="$2"
   local grading_home="$3"
   local report="$PWD/${name%/}.txt"
 
@@ -74,7 +74,7 @@ code_requirements_basic() {
   # Program must compile
   compile_strict "$name" "$report" a.out
   # No global variables
-  count_globals "$report" *.cpp
+  count_globals "$name" "$report"
   # Program must not have any run-time faults
   no_runtime_errors a.out "$report"
 }
