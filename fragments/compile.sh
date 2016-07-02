@@ -35,6 +35,7 @@ compile_strict() {
   g++ *.cpp -g -Wall -o "$output" 2>&1 | tee -a "$report"
   if [ ${PIPESTATUS[0]} -ne 0 ];then
     echo "### Program did not compile, or compiled with errors" >> "$report"
+    exit ${PIPESTATUS[0]}
   fi
   return ${PIPESTATUS[0]}
 }
