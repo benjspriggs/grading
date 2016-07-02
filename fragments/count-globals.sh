@@ -5,12 +5,16 @@
 # take a bunch of cpp files as arguments
 
 count_globals () {
-  local usage="count_globals <report> <files-to-lint> ..."
+  local usage="count_globals <name> <report>"
 
   # usage block
   {
     if [[ -z "$1" ]];then
-      die "Missing report" "$usage"
+      die "Missing program name" "$usage"
+    fi
+
+    if [[ -z "$2" ]];then
+	    die "Missing report name" "$usage"
     fi
   }
 
