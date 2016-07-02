@@ -10,17 +10,17 @@ compile_strict() {
   # usage block
   {
   if [ -z "$1" ]; then
-    die "Need student folder name" $usage
+    die "Need student folder name" "$usage"
     return
   fi
 
   if [ -z "$2" ]; then
-    die "Need student report name" $usage
+    die "Need student report name" "$usage"
     return
   fi
 
   if [ -z "$3" ]; then
-    die "Need output executable name" $usage
+    die "Need output executable name" "$usage"
     return
   fi
   }
@@ -31,10 +31,10 @@ compile_strict() {
 
   # Compile with all errors enabled
   echo "Compiling $name\..."
-  echo -e "\t\t## Compilation Output" >> $report
-  g++ *.cpp -g -Wall -o $output 2>&1 | tee -a $report
+  echo -e "\t\t## Compilation Output" >> "$report"
+  g++ *.cpp -g -Wall -o "$output" 2>&1 | tee -a "$report"
   if [ ${PIPESTATUS[0]} -ne 0 ]; then
-    echo -e "## Program did not compile\n$(cat $report)" | tee -a $report
+    echo -e "## Program did not compile\n$(cat $report)" | tee -a "$report"
   fi
 }
 
