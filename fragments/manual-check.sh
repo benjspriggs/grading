@@ -9,8 +9,8 @@ manual_check() {
 
   # usage block
   {
-    if [[ -z "$1" || ! -e "$1" ]];
-      die "Invalid report path given" "$usage"
+    if [[ -z "$1" ]]; then
+      die "Missing report path" "$usage"
     fi
   }
 
