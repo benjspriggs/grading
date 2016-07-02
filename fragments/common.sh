@@ -58,7 +58,8 @@ grade () {
   fi
 
   # open up all of their files in vim to check for formatting and add any additional notes
-  source $GRADING_HOME/fragments/manual-check.sh
+  echo "Manually checking for comments, headers, whitespacing and other details in source files..."
+  manual_check "$report"
 
   # finish execution
   echo "Anonymizing $report..."
