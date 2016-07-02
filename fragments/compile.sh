@@ -33,8 +33,6 @@ compile_strict() {
   echo "Compiling $name\..."
   echo -e "\t\t## Compilation Output" >> "$report"
   g++ *.cpp -g -Wall -o "$output" 2>&1 | tee -a "$report"
-  if [ ${PIPESTATUS[0]} -ne 0 ]; then
-    echo -e "## Program did not compile\n$(cat $report)" > "$report"
-  fi
+  return ${PIPESTATUS[0]}
 }
 
