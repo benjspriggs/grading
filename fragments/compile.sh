@@ -9,20 +9,20 @@ compile_strict() {
 
   # usage block
   {
-  if [ -z "$1" ]; then
-    die "Need student folder name" "$usage"
-    return
-  fi
+    if [ -z "$1" ]; then
+      die "Need student folder name" "$usage"
+      return
+    fi
 
-  if [ -z "$2" ]; then
-    die "Need student report name" "$usage"
-    return
-  fi
+    if [ -z "$2" ]; then
+      die "Need student report name" "$usage"
+      return
+    fi
 
-  if [ -z "$3" ]; then
-    die "Need output executable name" "$usage"
-    return
-  fi
+    if [ -z "$3" ]; then
+      die "Need output executable name" "$usage"
+      return
+    fi
   }
 
   local name="$1"
