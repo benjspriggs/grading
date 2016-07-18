@@ -51,9 +51,9 @@ grade () {
   else
     code_requirements_full
     if [[ $class =~ 163 ]]; then
-      python $LIB_DIR/cs163_code.py *.h *.cpp | tee -a $report
+      python $grading_home/lint/cs163_code.py *.h *.cpp | tee -a $report
     elif [[ $class =~ 202 ]]; then
-      python $LIB_DIR/cs202_code.py *.h *.cpp | tee -a $report
+      python $grading_home/lint/cs202_code.py *.h *.cpp | tee -a $report
     fi
   fi
 
