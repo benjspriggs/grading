@@ -80,4 +80,4 @@
 - [ ] IF and SWITCH statements are properly indented
 
 - [ ] Actually make the count_globals function count globals
-- [ ] Figure out what's giving the "line 25, ./: Is a directory" issues
+- [ ] Figure out what's giving the "line 25, ./: Is a directory" issues in no-runtime-errors.sh
