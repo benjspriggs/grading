@@ -22,7 +22,7 @@ no_runtime_errors() {
   local report="$2"
 
   # run the program
-  ./ "$program"
+  ./ $program
 
   if [ $? -ne 0 ]; then
     echo -e "## Program ran with runtime faults\nExit Code: $?" >> "$report"
