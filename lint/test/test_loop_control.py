@@ -2,7 +2,7 @@
 # test_loop_control.py
 
 from unittest import TestCase, main
-from lib import LoopControlLinter
+from lint.lib import LoopControlLinter
 
 class LoopControlLinterTest(TestCase):
     has_while_file = "test/fixtures/has-forever-while.cpp"

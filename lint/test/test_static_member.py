@@ -3,7 +3,7 @@
 # Test for Static Member linter
 
 from unittest import TestCase, main
-from lib import StaticMemberLinter
+from lint.lib import StaticMemberLinter
 
 class StaticMemberLinterTest(TestCase):
     has_static = "test/fixtures/has-static.cpp"
