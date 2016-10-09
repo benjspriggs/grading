@@ -1,0 +1,10 @@
+language: bash
+sudo: required
+before_script:
+        - sudo add-apt-repository ppa:duggan/bats --yes
+        - sudo apt-get update
+        - sudo apt-get install bats
+test:
+        - ./run-tests.bats
+script:
+        - ./install.sh
