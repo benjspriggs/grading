@@ -1,6 +1,6 @@
-before-script:
+before_script:
         - apt-get add-repository ppa:duggan/bats --yes
         - apt-get update -qq
         - apt-get install -qq bats
-script:
+test:
         - ./run-tests.bats
