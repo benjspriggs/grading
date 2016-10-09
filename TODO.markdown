@@ -23,7 +23,6 @@
 - [ ] Blank space required between words in a line
 - [ ] Blank space after each comma, and after * / + - = << >>
 - [ ] Indent each line of the program except for the curly braces that mark the beginning and end (TWO HARD SPACES MINIMUM, CONSISTENTLY)
-
 - [ ] Blank lines required between sections of program
 - [ ] Curly braces always appear on line after conditional in if, switch
 - [ ] Switch statement lables appear on same line of first statement
@@ -31,7 +30,7 @@
 - [ ] Header at top of each function
 - [ ] Comment after each varible declaration with usage
 - [ ] No use of while(1)
-- [ ] No use of standard string class ("#include <string>")
+- [ ] No use of standard string class (``"#include <string>``)
 
 # CS163
 ## Code requirements
@@ -68,11 +67,11 @@
 - [ ] Consistent style of indentation
 - [x] No global variables
 - [ ] No use of exit, continue, break to alter control flow loops
-- [ ] No while(1) loops or while(true) loops
+- [x] No while(1) loops or while(true) loops
 - [ ] No use of the std::string class (EXCEPT IN LATER ASSIGNMENTS)
 - [ ] Each file has name of the file, student, class number in header at top of the file
 - [ ] Comments use correct spelling and grammar
-- [ ] No gotos
+- [x] No gotos
 - [ ] All variable declarations happen before main()
 - [ ] Blank space after each function
 - [ ] Space after , . < > << >> + * / -
