@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/benjspriggs/grading.svg?branch=add-bats)](https://travis-ci.org/benjspriggs/grading)
 # Grading Scripts for CS{162,163,202}
 A series of scripts for ease of use in grading assignments for Karla's undergraduate Computer Science classes.
 A description and usage for each script can be found below, and by running a script with the "--help" flag.
