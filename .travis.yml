@@ -1,8 +1,8 @@
 language: bash
 sudo: required
 before_script:
-        - sudo apt-get update -qq
-        - sudo apt-get install -qq bats
+        - sudo apt-get update -q
+        - sudo apt-get install -q bats
 test:
         - ./run-tests.bats
 script:
