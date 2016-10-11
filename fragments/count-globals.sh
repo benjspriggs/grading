@@ -5,16 +5,16 @@
 # take a bunch of cpp files as arguments
 
 count_globals () {
-  local usage="count_globals <name> <report>"
+  local usage="count_globals <report> <p-name> [<files-to-lint...]"
 
   # usage block
   {
     if [[ -z "$1" ]];then
-      die "Missing program name" "$usage"
+      die "Missing report name" "$usage"
     fi
 
     if [[ -z "$2" ]];then
-	    die "Missing report name" "$usage"
+      die "Missing program name" "$usage"
     fi
   }
 
@@ -24,6 +24,7 @@ count_globals () {
   local files_to_lint=()
   for file in "${@:2}"; do
     if [[ $file =~ \.cpp ]]; then
+      file=$(realpath "$file")
       file=${file%%.cpp}
       files_to_lint+=("$file")
     fi
@@ -42,21 +43,21 @@ count_globals () {
       fi
 
       if [ ! -f $file.cpp ]; then
-        echo "File $file does not exist!"
+        echo "File '$file.cpp' does not exist!"
         break
       fi
 
       # count the number of global variables
       # NM puts global constants in the B, D, G sections
-      local globals=$( g++ -O0 -c $file.cpp && nm $file.o | grep ' [B,D,G] ' | wc -l )
-      rm $file.o
+      local globals=$( g++ -O0 -c "$file.cpp" && nm "$file.o" | grep ' [B,D,G] ' | wc -l )
+      rm "$file.o"
       if [[ $globals -gt 0 ]]; then
         # get names and such of variables
         echo -e "Found $globals global variables in $file..." | tee -a $report
         echo "$file.cpp::" >> $report
-        echo "$(g++ -O0 -c $file.cpp && nm $file.o | egrep ' [A-Z] ' | egrep -v ' [UTW] ')" >> $report
+        echo "$(g++ -O0 -c "$file.cpp" && nm "$file.o" | egrep ' [A-Z] ' | egrep -v ' [UTW] ')" >> $report
         rm $file.o
       fi
-  done
+    done
   fi
 }
