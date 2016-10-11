@@ -1,0 +1,7 @@
+din:spaghetti:noodles:marinara:sausage:parmesan:roll:end:
+din:burrito:tortilla:beef:pepper jack:beans:tomato:lettuce:sour cream:salsa:end:
+din:pad thai:noodles:tofu:tom yum:peanut sauce:lime:sprouts:egg:end:
+app:cheese sticks:cheese sticks:marinara:end:
+app:buffalo wings:chicken wings:buffalo sauce:veggie sticks:end:
+drink:tequila sunrise:tequila:orange juice:end:
+drink:bloody mary:vodka:tomato juice:habenero:veggie sticks:end:
