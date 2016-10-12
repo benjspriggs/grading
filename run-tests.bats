@@ -81,3 +81,19 @@ source ./fragments/count-globals.sh
 	echo "$output" | grep "Counted"
 	echo "$output" | grep "2"
 }
+
+source ./fragments/compile.sh
+
+# TODO: Write tests for compile
+
+source ./fragments/leak-check.sh
+
+# TODO: Write tests for leak-check
+
+source ./fragments/manual-check.sh
+
+# TODO: Write tests for manual-check
+
+source ./fragments/no-runtime-errors.sh
+
+# TODO: Write tests for no-runtime-errors
