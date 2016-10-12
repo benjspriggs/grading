@@ -7,6 +7,7 @@ setup() {
 	export FIXTURES="fixtures"
 	export FAILING_EXAMPLE_PROJ="$FIXTURES/example-student"
 	export REPORT="$TMP/report.txt"
+	export EXECUTABLE="$TMP/a.out"
 	mkdir "$TMP" "$TMP/foo"
 	touch "$TMP/emptyfile" "$TMP/emptyfile.cpp"
 }
@@ -82,6 +83,13 @@ source ./fragments/count-globals.sh
 	echo "$output" | grep "2"
 }
 
+@test "count_globals correctly handles globals in a directory" {
+	run count_globals "$REPORT" "$FAILING_EXAMPLE_PROJ"
+	[ "$status" -eq 0 ]
+	echo "$output" | grep "Counted"
+	echo "$output" | grep "2"
+}
+
 source ./fragments/compile.sh
 
 # TODO: Write tests for compile
@@ -104,21 +112,58 @@ source ./fragments/compile.sh
 }
 
 @test "compile_strict gives output and zero exit status with empty folder" {
-	run compile_strict "$TMP/foo" "$TMP/report.txt" "$TMP/a.out"
+	run compile_strict "$TMP/foo" "$TMP/report.txt" "$EXECUTABLE"
 	[ "$status" -eq 0 ]
 	[ ! -z "$output" ]
 }
 
 @test "compile_strict gives output with failing example folder" {
-	run compile_strict "$FAILING_EXAMPLE_PROJ" "$TMP/foo" "$TMP/a.out"
+	run compile_strict "$FAILING_EXAMPLE_PROJ" "$TMP/foo" "$EXECUTABLE"
 	[ "$status" != 0 ]
 	[ ! -z "$output" ]
 }
 
+@test "compile_strict gives proper output on passing source" {
+	run compile_strict "$FIXTURES/passing-source.cpp" "$TMP/foo" "$EXECUTABLE"
+	[ "$status" != 0 ]
+	[ ! -z "$output" ]
+}
 source ./fragments/leak-check.sh
 
-# TODO: Write tests for leak-check
+@test "leak_check needs a program name" {
+	run leak_check
+	[ "$status" != 0 ]
+	[ $(expr "$output" : "program") -eq 0 ]
+}
 
+@test "leak_check needs a report name" {
+	run leak_check "$EXECUTABLE"
+	[ "$status" != 0 ]
+	[ $(expr "$output" : "report") -eq 0 ]
+}
+
+@test "leak_check produces output on empty file" {
+	touch "$EXECUTABLE"
+	chmod +x "$EXECUTABLE"
+	run leak_check "$EXECUTABLE" "$REPORT"
+	[ "$status" = 0 ]
+	[ ! -z "$output" ]
+}
+
+@test "leak_check produces output on working program with no leaks" {
+	g++ "$FIXTURES/no-leaks.cpp" -o "$EXECUTABLE"
+	run leak_check "$EXECUTABLE" "$REPORT"
+	[ "$status" = 0 ]
+	[ ! -z "$output" ]
+}
+
+@test "leak_check produces output on working program with leaks" {
+	g++ "$FIXTURES/has-leaks.cpp" -o "$EXECUTABLE"
+	run leak_check "$EXECUTABLE" "$REPORT"
+	[ "$status" = 2 ]
+	[ ! -z "$output" ]
+}
+# TODO: Write tests for leak-check
 source ./fragments/manual-check.sh
 
 # TODO: Write tests for manual-check
