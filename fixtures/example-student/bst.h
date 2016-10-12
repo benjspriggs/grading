@@ -9,6 +9,10 @@
 #include <fstream>
 using namespace std;
 
+int this_is_a_global;
+int this_is_a_global_initialized = 2;
+const this_is_a_global_constant = 4;
+const this_is_a_global_constant;
 
 class bst
 {
