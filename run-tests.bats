@@ -5,7 +5,7 @@ source ./fragments/common.sh
 setup() {
 	export TMP="tmp"
 	export FIXTURES="fixtures"
-	export EXAMPLE_PROJ="$TMP/example-student"
+	export FAILING_EXAMPLE_PROJ="$FIXTURES/example-student"
 	export REPORT="$TMP/report.txt"
 	mkdir "$TMP" "$TMP/foo"
 	touch "$TMP/emptyfile" "$TMP/emptyfile.cpp"
@@ -85,6 +85,35 @@ source ./fragments/count-globals.sh
 source ./fragments/compile.sh
 
 # TODO: Write tests for compile
+@test "compile_strict needs student folder name" {
+	run compile_strict
+	[ "$status" -eq 1 ]
+	[ $(expr "$output" : "folder") -eq 0 ]
+}
+
+@test "compile_strict needs report name" {
+	run compile_strict "foo"
+	[ "$status" -eq 1 ]
+	[ $(expr "$output" : "report") -eq 0 ]
+}
+
+@test "compile_strict needs executable name" {
+	run compile_strict "foo" "bar"
+	[ "$status" -eq 1 ]
+	[ $(expr "$output" : "executable") -eq 0 ]
+}
+
+@test "compile_strict gives output and zero exit status with empty folder" {
+	run compile_strict "$TMP/foo" "$TMP/report.txt" "$TMP/a.out"
+	[ "$status" -eq 0 ]
+	[ ! -z "$output" ]
+}
+
+@test "compile_strict gives output with failing example folder" {
+	run compile_strict "$FAILING_EXAMPLE_PROJ" "$TMP/foo" "$TMP/a.out"
+	[ "$status" != 0 ]
+	[ ! -z "$output" ]
+}
 
 source ./fragments/leak-check.sh
 
