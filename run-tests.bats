@@ -78,5 +78,6 @@ source ./fragments/count-globals.sh
 	# skip "Determine output of function first, or way to check substrings"
 	run count_globals "$REPORT" "$FIXTURES/has-global.cpp"
 	[ "$status" -eq 0 ]
-	echo "$output" | grep 'Counted'
+	echo "$output" | grep "Counted"
+	echo "$output" | grep "2"
 }
