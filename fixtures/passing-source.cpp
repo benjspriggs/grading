@@ -20,7 +20,7 @@ int main()
 
   // Read in the month, day and year
   // cin >> month >> day >> year;
-  mount = 4, day = 2, year = 1995;
+  month = 4, day = 2, year = 1995;
 
   /*cin >> month;
   cin >> day;
