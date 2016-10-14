@@ -26,37 +26,37 @@ count_globals () {
     fi
   done
 
-  if [[ ${#files_to_lint[@]} != 0 ]]; then
-    # count the number of files
-    echo -e "\t\t## Global Context Output" >> "$report"
-    echo -e "Counted ${#files_to_lint[@]} file(s)." >> "$report"
+  [[ ${#files_to_lint[@]} != 0 ]] && return
 
-    # lint the files
-    for file in "${files_to_lint[@]}"; do
-      if [ -z "$file" ]; then
-        echo "Cannot have empty filenames."
-        break
-      fi
+  # count the number of files
+  echo -e "\t\t## Global Context Output" >> "$report"
+  echo -e "Counted ${#files_to_lint[@]} file(s)." >> "$report"
 
-      if [ ! -f "$file.cpp" ]; then
-        echo "File '$file.cpp' does not exist!"
-        break
-      fi
+  # lint the files
+  for file in "${files_to_lint[@]}"; do
+    if [ -z "$file" ]; then
+      echo "Cannot have empty filenames."
+      break
+    fi
 
-      # count the number of global variables
-      # NM puts global constants in the B, D sections
-      local globals=$(compile_and_count "$file" | grep ' [BDG] ' | wc -l)
-      if [[ "$globals" -gt 0 ]]; then
-        # get names and such of variables
-        echo -e "Counted $globals global variables in $file..." \
-          | tee -a "$report"
-        echo -e "$file.cpp::" >> "$report"
-        compile_and_count "$file" \
-          | egrep ' [A-Z] ' | egrep -v ' [UTW] ' \
+    if [ ! -f "$file.cpp" ]; then
+      echo "File '$file.cpp' does not exist!"
+      break
+    fi
+
+    # count the number of global variables
+    # NM puts global constants in the B, D sections
+    local globals=$(compile_and_count "$file" | grep ' [BDG] ' | wc -l)
+    if [[ "$globals" -gt 0 ]]; then
+      # get names and such of variables
+      echo -e "Counted $globals global variables in $file..." \
+        | tee -a "$report"
+      echo -e "$file.cpp::" >> "$report"
+      compile_and_count "$file" \
+        | egrep ' [A-Z] ' | egrep -v ' [UTW] ' \
         >> "$report"
-      fi
-    done
-  fi
+    fi
+  done
 }
 
 compile_and_count()
