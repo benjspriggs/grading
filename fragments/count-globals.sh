@@ -15,9 +15,12 @@ count_globals () {
   }
 
   local report="$1"
-  _collect_files
+  # collect all of the cpp files to lint
+  # as base filenames, no extension (assume .cpp)
+  export files_to_lint=()
+  _collect_files "${@:2}"
 
-  [[ ${#files_to_lint[@]} != 0 ]] && return
+  [[ ${#files_to_lint[@]} == 0 ]] && return
 
   # count the number of files
   echo -e "\t\t## Global Context Output" >> "$report"
@@ -25,7 +28,7 @@ count_globals () {
 
   # lint the files
   for file in "${files_to_lint[@]}"; do
-    _validate_file "$file" && break
+    _validate_file "$file" || break
 
     # count the number of global variables
     # nm puts global constants in the B, D sections
@@ -78,18 +81,14 @@ _validate_file(){
 }
 
 _collect_files(){
-  # collect all of the cpp files to lint
-  # (in $@, after the first argument)
-  export files_to_lint=()
-
-  for file in "${@:2}"; do
+  # (in $@, after the first name)
+  for file in "$@"; do
     if [[ "$file" =~ \.cpp ]]; then
       file=$(realpath "$file")
       file=${file%%.cpp}
       files_to_lint+=("$file")
     elif [ -d "$file" ]; then
-      _collect_files
+      _collect_files "$file"/*
     fi
   done
-
 }
