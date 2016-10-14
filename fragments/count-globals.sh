@@ -15,16 +15,7 @@ count_globals () {
   }
 
   local report="$1"
-  # collect all of the cpp files to lint
-  # (in $@, after the first argument)
-  local files_to_lint=()
-  for file in "${@:2}"; do
-    if [[ $file =~ \.cpp ]]; then
-      file=$(realpath "$file")
-      file=${file%%.cpp}
-      files_to_lint+=("$file")
-    fi
-  done
+  _collect_files
 
   [[ ${#files_to_lint[@]} != 0 ]] && return
 
@@ -34,18 +25,10 @@ count_globals () {
 
   # lint the files
   for file in "${files_to_lint[@]}"; do
-    if [ -z "$file" ]; then
-      echo "Cannot have empty filenames."
-      break
-    fi
-
-    if [ ! -f "$file.cpp" ]; then
-      echo "File '$file.cpp' does not exist!"
-      break
-    fi
+    _validate_file "$file" && break
 
     # count the number of global variables
-    # NM puts global constants in the B, D sections
+    # nm puts global constants in the B, D sections
     local globals=$(compile_and_count "$file" | grep ' [BDG] ' | wc -l)
     if [[ "$globals" -gt 0 ]]; then
       # get names and such of variables
@@ -57,6 +40,8 @@ count_globals () {
         >> "$report"
     fi
   done
+
+  unset files_to_lint
 }
 
 compile_and_count()
@@ -80,3 +65,31 @@ compile_and_count()
   echo -e "$output"
 }
 
+_validate_file(){
+  if [ -z "$1" ]; then
+    echo "Cannot have empty files."
+    return 1
+  fi
+
+  if [ ! -f "$1.cpp" ]; then
+    echo "1 '$1.cpp' does not exist!"
+    return 1
+  fi
+}
+
+_collect_files(){
+  # collect all of the cpp files to lint
+  # (in $@, after the first argument)
+  export files_to_lint=()
+
+  for file in "${@:2}"; do
+    if [[ "$file" =~ \.cpp ]]; then
+      file=$(realpath "$file")
+      file=${file%%.cpp}
+      files_to_lint+=("$file")
+    elif [ -d "$file" ]; then
+      _collect_files
+    fi
+  done
+
+}

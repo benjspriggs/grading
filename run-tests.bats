@@ -76,7 +76,6 @@ source ./fragments/count-globals.sh
 }
 
 @test "count_globals correctly counts globals in a file" {
-	# skip "Determine output of function first, or way to check substrings"
 	run count_globals "$REPORT" "$FIXTURES/has-global.cpp"
 	[ "$status" -eq 0 ]
 	echo "$output" | grep "Counted"
