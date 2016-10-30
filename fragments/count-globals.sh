@@ -58,7 +58,7 @@ compile_and_count()
   }
 
   # Do nothing with empty files
-  [ ! -s "$file" ] && return
+  [ -s "$1" ] || return
 
   file="$(realpath "$1")"
   file="${file%%.*}"
