@@ -44,23 +44,17 @@ source ./fragments/count-globals.sh
 	[ $(expr "$output" : "Missing filename") -ne 0 ]
 }
 
-@test "compile_and_count counts an empty file" {
+@test "compile_and_count accepts and does not count an empty file" {
 	run compile_and_count "$TMP/emptyfile"
 	[ "$status" -eq 0 ]
 	[ -z "$output" ]
-}
-
-@test "compile_and_count does not need matching pattern" {
-	run compile_and_count "$FIXTURES/has-global.cpp"
-	[ "$status" -eq 0 ]
-	[ ! -z "$output" ]
-	[ $(expr "$output" : "g++") -eq 0 ]
 }
 
 @test "compile_and_count takes and produces correct output" {
 	run compile_and_count "$FIXTURES/has-global.cpp"
 	[ "$status" -eq 0 ]
 	[ ! -z "$output" ]
+	[ $(expr "$output" : "2") -ne 0 ]
 }
 
 @test "count_globals produces output with empty file" {
