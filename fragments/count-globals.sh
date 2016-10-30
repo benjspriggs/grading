@@ -61,7 +61,7 @@ compile_and_count()
   file="$(realpath "$1")"
 
   # Do nothing with empty files
-  [[ -s "$file" ]] || return
+  [[ -s "$file" ]] || return 0
 
   # strip file extension
   file="${file%%.*}"
