@@ -1,4 +1,5 @@
 #include <iostream>
+// This file has 2 globals
 
 const int SIZE = 40; // This should not give an error
 int d; // This should
