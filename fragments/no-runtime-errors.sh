@@ -3,17 +3,29 @@
 # makes sure a program runs without any runtime errors
 # dumps errors and such into STUDENT_REPORT
 
-# make sure we have all the arguments
-if [[ -z "$1" ]]; then
-  echo "Need executable as argument: $(readlink -f $0) <filename>"
-  exit 1
-fi
+no_runtime_errors() {
+  # make sure we have all the arguments
+  local usage="no_runtime_errors <filename> <report>"
 
-# run the program
-./$1
+  # usage block
+  {
+    if [[ -z "$1" || ! -x "$1" ]]; then
+      die "Need executable name" "$usage"
+    fi
 
-if [ $? -ne 0 ]; then
-  echo -e "## Program ran with runtime faults\nExit Code: $?" >> $STUDENT_REPORT
-  exit 1
-fi
+    if [ -z "$2" ]; then
+      die "Need report name" "$usage"
+    fi
+  }
 
+  local program="$1"
+  local report="$2"
+
+  # run the program
+  ./$program
+
+  if [ $? -ne 0 ]; then
+    echo -e "## Program ran with runtime faults\nExit Code: $?" >> "$report"
+    exit 1
+  fi
+}

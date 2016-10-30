@@ -4,3 +4,4 @@ paths.sh
 a.out
 *.pyc
 *.o
+tags
