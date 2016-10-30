@@ -3,7 +3,7 @@
 # Test the Lint class
 
 import unittest
-from lib import Linter
+from lint.lib import Linter
 
 class TestLinter(unittest.TestCase):
     lint = Linter()
