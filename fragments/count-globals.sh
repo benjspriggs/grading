@@ -57,11 +57,15 @@ compile_and_count()
     fi
   }
 
-  # Do nothing with empty files
-  [ -s "$1" ] || return
 
   file="$(realpath "$1")"
+
+  # Do nothing with empty files
+  [[ -s "$file" ]] || return
+
+  # strip file extension
   file="${file%%.*}"
+
 
   output=$( g++ -O0 -c "$file.cpp" -o "$file.o" && nm "$file.o")
   rm "$file.o"
