@@ -1,3 +1,5 @@
+all: compile
+	valgrind --leak-check=full ./a.out
 compile:
 	@g++ *.cpp -g -Wall -o a.out
 
