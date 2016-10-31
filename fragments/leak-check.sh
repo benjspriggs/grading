@@ -10,7 +10,7 @@ leak_check() {
 
   # usage block
   {
-    if [[ -z "$1" || ! -x "$1" ]]; then
+    if [ -z "$1" -o ! -x "$1" ]; then
       die "'$1' is not exectutable or does not exist" "$usage"
     fi
 
@@ -27,10 +27,11 @@ leak_check() {
 
   valgrind --leak-check=full --error-exitcode=2 --log-file=$LOG_FILE ./"$1"
 
-  if [ $? -ne 0 ]; then
+  retval=$?
+  if [ $retval -ne 0 ]; then
     # if there is, add the valgrind output to the file
     echo "Valgrind encountered errors, dumping output to $LOG_FILE..."
-    if [[ $? == 2 ]]; then
+    if [ $retval = 2 ]; then
       ERR_CODE="## Destructors did not deallocate all dynamic memory"
     else
       ERR_CODE="## Program did not complete successfully due to runtime errors"
@@ -41,4 +42,5 @@ leak_check() {
 
   # clean up
   rm $LOG_FILE
+  return $retval
 }
