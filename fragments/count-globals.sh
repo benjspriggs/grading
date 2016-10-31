@@ -32,13 +32,13 @@ count_globals () {
 
     # count the number of global variables
     # nm puts global constants in the B, D sections
-    local globals=$(compile_and_count "$file" | grep ' [BDG] ' | wc -l)
+    local globals=$(_nm_output "$file" | grep ' [BDG] ' | wc -l)
     if [[ "$globals" -gt 0 ]]; then
       # get names and such of variables
       echo -e "Counted $globals global variables in $file..." \
         | tee -a "$report"
       echo -e "$file.cpp::" >> "$report"
-      compile_and_count "$file" \
+      _nm_output "$file" \
         | egrep ' [A-Z] ' | egrep -v ' [UTW] ' \
         >> "$report"
     fi
@@ -47,10 +47,10 @@ count_globals () {
   unset files_to_lint
 }
 
-compile_and_count()
+_nm_output()
 {
   {
-    usage="compile_and_count <filename>"
+    usage="_nm_output <filename>"
 
     if [ -z "$1" ]; then
       die "Missing filename" "$usage"

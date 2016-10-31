@@ -40,20 +40,20 @@ source ./fragments/count-globals.sh
     [ $(expr "$output" : "Missing report") -ne 0 ]
 }
 
-@test "compile_and_count does need filename" {
-  run compile_and_count
+@test "_nm_output does need filename" {
+  run _nm_output
     [ "$status" -eq 1 ]
     [ $(expr "$output" : "Missing filename") -ne 0 ]
 }
 
-@test "compile_and_count accepts and does not count an empty file" {
-  run compile_and_count "$TMP/emptyfile"
+@test "_nm_output accepts and does not count an empty file" {
+  run _nm_output "$TMP/emptyfile"
     [ "$status" -eq 0 ]
     [ -z "$output" ]
 }
 
-@test "compile_and_count takes and produces correct output" {
-  run compile_and_count "$FIXTURES/has-global.cpp"
+@test "_nm_output takes and produces correct output" {
+  run _nm_output "$FIXTURES/has-global.cpp"
     [ "$status" -eq 0 ]
     [ ! -z "$output" ]
 }
