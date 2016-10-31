@@ -37,7 +37,7 @@ count_globals () {
       # get names and such of variables
       echo -e "Counted $globals global variables in $file..." \
         | tee -a "$report"
-      echo -e "$file.cpp::" >> "$report"
+      echo -e "$file::" >> "$report"
       _nm_output "$file" \
         | egrep ' [A-Z] ' | egrep -v ' [UTW] ' \
         >> "$report"
@@ -78,8 +78,8 @@ _validate_file(){
     return 1
   fi
 
-  if [ ! -f "$1.cpp" ]; then
-    echo "1 '$1.cpp' does not exist!"
+  if [ ! -f "$1" ]; then
+    echo "'$1' does not exist!"
     return 1
   fi
 }
@@ -89,7 +89,7 @@ _collect_files(){
   for file in "$@"; do
     if [[ "$file" =~ \.cpp ]]; then
       file=$(realpath "$file")
-      file=${file%%.cpp}
+      # file=${file%%.cpp}
       files_to_lint+=("$file")
     elif [ -d "$file" ]; then
       _collect_files "$file"/*
