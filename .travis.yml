@@ -7,4 +7,5 @@ before_script:
         - sudo apt-get update
         - sudo apt-get install bats
 script:
+        - bats -v
         - bats run-tests.bats
