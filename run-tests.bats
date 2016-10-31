@@ -56,7 +56,6 @@ source ./fragments/count-globals.sh
   run compile_and_count "$FIXTURES/has-global.cpp"
     [ "$status" -eq 0 ]
     [ ! -z "$output" ]
-      [ $(expr "$output" : "2") -ne 0 ]
 }
 
 @test "count_globals produces output with empty file" {
