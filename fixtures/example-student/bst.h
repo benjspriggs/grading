@@ -12,7 +12,6 @@ using namespace std;
 int this_is_a_global;
 int this_is_a_global_initialized = 2;
 const int this_is_a_global_constant = 4;
-const int this_is_also_a_global_constant;
 
 class bst
 {
