@@ -11,8 +11,8 @@ using namespace std;
 
 int this_is_a_global;
 int this_is_a_global_initialized = 2;
-const this_is_a_global_constant = 4;
-const this_is_a_global_constant;
+const int this_is_a_global_constant = 4;
+const int this_is_also_a_global_constant;
 
 class bst
 {
@@ -29,7 +29,7 @@ class bst
 		//ingredient * swap(char * name, char * meal);
 		void display(node *& toDisp);//
 		void display_all();//
-	//	int remove(&node);
+		//	int remove(&node);
 		void add_menu(char * menu_name, char *ing_name );//
 
 
