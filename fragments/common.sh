@@ -24,7 +24,7 @@ grade () {
   # usage block
   {
     if [[ -z "$1" || ! -d "$1" ]]; then
-      die "Missing student dirname or non-direcory given" "$usage"
+      die "Missing student dirname or non-directory given" "$usage"
       exit
     fi
 
@@ -33,7 +33,7 @@ grade () {
     fi
 
     if [[ -z "$3" || ! -d "$3" ]]; then
-      die "Missing grading directory or non-direcory given" "$usage"
+      die "Missing grading directory or non-directory given" "$usage"
       exit
     fi
   }
@@ -50,6 +50,7 @@ grade () {
     code_requirements_basic
   else
     code_requirements_full
+    echo -e "\t** Linting Feedback **" >> "$report"
     if [[ $class =~ 163 ]]; then
       python $grading_home/lint/cs163_code.py *.h *.cpp | tee -a $report
     elif [[ $class =~ 202 ]]; then
