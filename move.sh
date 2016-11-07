@@ -53,14 +53,21 @@ put_makefile_in_dir() {
   cd $GRADING_LOCAL
 }
 
-# TODO: fix hang if first folder sought isn't the right one
 go_to_dir_with_cpp() {
+  amount_cpp='find . -type f -printf "%f\n" | grep .cpp -c'
+  candidate=`eval $amount_cpp`
+
   for file in *; do
-    if [ -d "$file" ]; then
-      if [ $(ls -l *.cpp 2>/dev/null | wc -l) -gt 1 ]; then
-       break
-      fi
-      cd "$file"
+    if [ ! -d "$file" ]; then
+      break
+    fi
+    cd "$file"
+    current=`eval $amount_cpp`
+    if [ $current -lt $candidate ]; then
+      cd ..
+    else
+      go_to_dir_with_cpp
+      break
     fi
   done
 }
