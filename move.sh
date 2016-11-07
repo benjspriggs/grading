@@ -49,10 +49,11 @@ put_makefile_in_dir() {
     count=$(ls -l *.cpp 2>/dev/null | wc -l)
   done
   echo Moving makefile to $(pwd)/makefile...
-  $(cat $MAKEFILE > $(pwd)/makefile)
+  $(cat "$MAKEFILE" > "$(pwd)/makefile")
   cd $GRADING_LOCAL
 }
 
+# TODO: fix hang if first folder sought isn't the right one
 go_to_dir_with_cpp() {
   for file in *; do
     if [ -d "$file" ]; then
@@ -64,6 +65,7 @@ go_to_dir_with_cpp() {
   done
 }
 
+# TODO: Escape these
 if [[ -e $MAKEFILE && -e $ARCHIVE ]]; then
   [ -d $NAME ] || mkdir $NAME
   # extract the archive to a folder
