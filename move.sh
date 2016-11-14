@@ -10,14 +10,14 @@ SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
   DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
   SOURCE="$(readlink "$SOURCE")"
-  [[ "$$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
-PATHS=${DIR%$(basename "$$SOURCE")}/paths.sh
-source "$$PATHS"
+PATHS=${DIR%$(basename "$SOURCE")}/paths.sh
+source "$PATHS"
 if [ -z ${GRADING_LOCAL+x} ] || [ -z ${GRADING_REMOTE+x} ] || [ -z ${LINUX+x} ] || [ -z ${MAKEFILE+x} ] ; then
-  echo "$$SOURCE"
-  echo "$$DIR"
+  echo "$SOURCE"
+  echo "$DIR"
   echo "Please install the path script ('path.sh') to $PATHS and update the following paths:
   GRADING_LOCAL
   GRADING_REMOTE
@@ -33,7 +33,7 @@ if [ -z "$1" -o -z "$2" ]; then
 fi
 
 for arg in $@; do
-  if [ ["$$arg"] == ["--help"] -o ["$$arg"] == ["-h"] ]; then
+  if [ ["$arg"] == ["--help"] -o ["$arg"] == ["-h"] ]; then
     echo "$HELP_MSG"
     exit 0
   fi
@@ -44,13 +44,13 @@ ARCHIVE="$2" # archive name
 
 put_makefile_in_dir() {
   count=$(ls -l *.cpp 2>/dev/null | wc -l)
-  while [ "$$count" -lt 1 ]; do
+  while [ "$count" -lt 1 ]; do
     go_to_dir_with_cpp
     count=$(ls -l *.cpp 2>/dev/null | wc -l)
   done
   echo Moving makefile to $(pwd)/makefile...
   $(cat "$MAKEFILE" > "$(pwd)/makefile")
-  cd "$$GRADING_LOCAL"
+  cd "$GRADING_LOCAL"
 }
 
 go_to_dir_with_cpp() {
@@ -63,7 +63,7 @@ go_to_dir_with_cpp() {
     fi
     cd "$file"
     current=`eval $amount_cpp`
-    if [ "$$current" -lt "$$candidate" ]; then
+    if [ "$current" -lt "$candidate" ]; then
       cd ..
     else
       go_to_dir_with_cpp
@@ -74,18 +74,18 @@ go_to_dir_with_cpp() {
 
 # TODO: Escape these
 if [[ -e "$MAKEFILE" && -e "$ARCHIVE" ]]; then
-  [ -d "$$NAME" ] || mkdir "$$NAME"
+  [ -d "$NAME" ] || mkdir "$NAME"
   # extract the archive to a folder
   echo "Extracting archive $ARCHIVE..."
   if [[ "$ARCHIVE" =~ \.zip$ ]]; then
     unzip "$ARCHIVE" -d "$NAME"
   elif [[ "$ARCHIVE" =~ \.tar || $"$ARCHIVE" =~ \.gz$ || "$ARCHIVE" =~ \.tgz || "$ARCHIVE" =~ \.bz2$ ]]; then
-    tar xvf "$$ARCHIVE" -C "$$NAME"
+    tar xvf "$ARCHIVE" -C "$NAME"
   elif [[ "$ARCHIVE" =~ \.rar$ ]]; then
-    unrar e "$$ARCHIVE" "$$NAME"
+    unrar e "$ARCHIVE" "$NAME"
   else
     echo -e "Archive format of \"$ARCHIVE\" not recognized. \nMust be a zip, tar, bz2, or gz."
-    rm -d "$$NAME"
+    rm -d "$NAME"
     exit 1
   fi
   # add a makefile to the folder
@@ -93,16 +93,16 @@ if [[ -e "$MAKEFILE" && -e "$ARCHIVE" ]]; then
 
   # copy the folder to the linux directory
   echo Moving $NAME\...
-  if $(scp -r "$$GRADING_LOCAL"/"$$NAME" $LINUX:$GRADING_REMOTE); then
+  if $(scp -r "$GRADING_LOCAL"/"$NAME" $LINUX:$GRADING_REMOTE); then
     echo $NAME moved successfully to PSU Linux systems at $GRADING_REMOTE.
     echo Cleaning up the directory...
-    rm -rf "$$GRADING_LOCAL"/"$$NAME"
+    rm -rf "$GRADING_LOCAL"/"$NAME"
     echo Done.
   fi
-elif [[ -e "$$ARCHIVE" ]]; then
+elif [[ -e "$ARCHIVE" ]]; then
   echo "Makefile doesn't exist. Add a makefile in $MAKEFILE."
   exit 1
-elif [[ -e "$$MAKEFILE" ]]; then
+elif [[ -e "$MAKEFILE" ]]; then
   echo "Archive \"$ARCHIVE\" doesn't exist."
   exit 1
 fi
