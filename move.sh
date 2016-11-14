@@ -44,10 +44,7 @@ ARCHIVE="$2" # archive name
 
 put_makefile_in_dir() {
   count=$(ls -l *.cpp 2>/dev/null | wc -l)
-  while [ "$count" -lt 1 ]; do
-    go_to_dir_with_cpp
-    count=$(ls -l *.cpp 2>/dev/null | wc -l)
-  done
+  go_to_dir_with_cpp
   echo Moving makefile to $(pwd)/makefile...
   $(cat "$MAKEFILE" > "$(pwd)/makefile")
   cd "$GRADING_LOCAL"
