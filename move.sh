@@ -43,10 +43,10 @@ NAME="$1" # name of the individual, folder where the extracted contents will go
 ARCHIVE="$2" # archive name
 
 put_makefile_in_dir() {
-  count=$(ls -l *.cpp 2>/dev/null | wc -l)
+  cd "$GRADING_LOCAL"/"$NAME"
   go_to_dir_with_cpp
   echo Moving makefile to $(pwd)/makefile...
-  $(cat "$MAKEFILE" > "$(pwd)/makefile")
+  cp "$MAKEFILE" makefile
   cd "$GRADING_LOCAL"
 }
 
@@ -69,7 +69,6 @@ go_to_dir_with_cpp() {
   done
 }
 
-# TODO: Escape these
 if [[ -e "$MAKEFILE" && -e "$ARCHIVE" ]]; then
   [ -d "$NAME" ] || mkdir "$NAME"
   # extract the archive to a folder
