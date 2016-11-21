@@ -35,7 +35,7 @@ compile_strict() {
   # Compile with all errors enabled
   echo -e "Compiling $name\..."
   echo -e "\t\t## Compilation executable" >> "$report"
-  g++ "$source_files" -Wall -o "$executable"\
+  g++ $source_files -Wall -o "$executable"\
     2>&1 | tee -a "$report"
   if [ ${PIPESTATUS[0]} -ne 0 ];then
     echo "### Program did not compile, or compiled with errors" >> "$report"
