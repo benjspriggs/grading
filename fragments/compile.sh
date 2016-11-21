@@ -24,12 +24,14 @@ compile_strict() {
       return
     fi
   }
+  # assume we are in the root of the
+  # project to compile
 
   local name="$1"
   local report="$2"
   local executable="$3"
 
-  local source_files="$(find "$name" -name "*.cpp" | xargs echo)"
+  local source_files="$(find . -name "*.cpp" | xargs echo)"
   # Compile with all errors enabled
   echo -e "Compiling $name\..."
   echo -e "\t\t## Compilation executable" >> "$report"
