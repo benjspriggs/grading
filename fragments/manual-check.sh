@@ -14,7 +14,7 @@ manual_check() {
     fi
   }
 
-  local $report="$1"
+  local report="$1"
   # TODO add some way to process comment density?
   if ls -l *.h > /dev/null 2>&1;then
     vim -p *.h $report
