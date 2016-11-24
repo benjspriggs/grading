@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # An automated moving and makefile-adding script for CS202
 
-HELP_MSG="Usage: grade (--help) name [archive]
+HELP_MSG="Usage: move (--help) name [archive]
 This script takes an archive, opens it, adds a default makefile for general use,
 and makes the extracted files available on the PSU linux systems."
 
