@@ -56,7 +56,7 @@ grade () {
     elif [[ $class =~ 202 ]]; then
       lint_feedback="${lint_feedback}$(echo; python $grading_home/lint/cs202_code.py *.h *.cpp)"
     fi
-    [[ -z "$lint_feedback" ]] && echo -e "\t** Linting Feedback **${lint_feedback}" >> "$report"
+    [[ ! -z "$lint_feedback" ]] && echo -e "\t** Linting Feedback **${lint_feedback}" >> "$report"
   fi
 
   # open up all of their files in vim to check for formatting and add any additional notes
