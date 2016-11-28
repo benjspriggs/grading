@@ -50,12 +50,13 @@ grade () {
     code_requirements_basic
   else
     code_requirements_full
-    echo -e "\t** Linting Feedback **" >> "$report"
+    lint_feedback=
     if [[ $class =~ 163 ]]; then
-      python $grading_home/lint/cs163_code.py *.h *.cpp | tee -a $report
+      lint_feedback="${lint_feedback}$(echo; python $grading_home/lint/cs163_code.py *.h *.cpp)"
     elif [[ $class =~ 202 ]]; then
-      python $grading_home/lint/cs202_code.py *.h *.cpp | tee -a $report
+      lint_feedback="${lint_feedback}$(echo; python $grading_home/lint/cs202_code.py *.h *.cpp)"
     fi
+    [[ -z "$lint_feedback" ]] && echo -e "\t** Linting Feedback **${lint_feedback}" >> "$report"
   fi
 
   # open up all of their files in vim to check for formatting and add any additional notes
