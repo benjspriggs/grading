@@ -52,9 +52,9 @@ grade () {
     code_requirements_full
     lint_feedback=
     if [[ $class =~ 163 ]]; then
-      lint_feedback="${lint_feedback}$(echo; python $grading_home/lint/cs163_code.py *.h *.cpp)"
+      lint_feedback="${lint_feedback}$(echo; ./$grading_home/lint/cs163_code.py *.h *.cpp)"
     elif [[ $class =~ 202 ]]; then
-      lint_feedback="${lint_feedback}$(echo; python $grading_home/lint/cs202_code.py *.h *.cpp)"
+      lint_feedback="${lint_feedback}$(echo; ./$grading_home/lint/cs202_code.py *.h *.cpp)"
     fi
     [[ ! -z "$lint_feedback" ]] && echo -e "\t** Linting Feedback **${lint_feedback}" >> "$report"
   fi
