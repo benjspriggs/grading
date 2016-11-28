@@ -56,7 +56,6 @@ grade () {
     elif [[ $class =~ 202 ]]; then
       lint_feedback="${lint_feedback}$(echo; python $grading_home/lint/cs202_code.py *.h *.cpp)"
     fi
-    echo "$lint_feedback"
     [[ ! -z "$lint_feedback" ]] && echo -e "\t** Linting Feedback **${lint_feedback}" >> "$report"
   fi
 
