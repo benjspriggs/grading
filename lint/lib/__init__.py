@@ -1,3 +1,6 @@
-from lint import Linter
-from loop_control import LoopControlLinter
-from static_member import StaticMemberLinter
+__all__ = [
+    'lint',
+    'linting',
+    'loop_control',
+    'static_member'
+]
