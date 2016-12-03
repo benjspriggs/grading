@@ -36,7 +36,7 @@ leak_check() {
     else
       ERR_CODE="## Program did not complete successfully due to runtime errors"
     fi
-    echo -e "$ERR_CODE\nFrom valgrind:" > $report
+    echo -e "$ERR_CODE\nFrom valgrind:" >> $report
     cat $LOG_FILE >> $report
   fi
 
