@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
+# unzips a packaged D2l file
+# places student work into unique directories
+# and adds 'graded' folder to store already graded work
+# usage: ./sort-files <d2l-zip>
 
-[[ -z "$1" ]] && exit 1
+# require zip path
+[[ -z "$1" ]] && >&2 echo 'usage: ./sort-files <d2l-zip>' && exit 1
 
 basename=all
 files="$basename/*"
