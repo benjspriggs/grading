@@ -44,7 +44,7 @@ def is_late(fn, date):
     return [name for (name, dates) in d.items() if True in dates]
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         print("usage: ./late.py <d2l index> \'<late date>\'")
         print("(quotes are important)")
         sys.exit(1)
