@@ -5,7 +5,7 @@ HELP_MSG="Usage: move (--help) name [archive]
 This script takes an archive, opens it, adds a default makefile for general use,
 and makes the extracted files available on the PSU linux systems."
 
-# REQUIRES - GRADING_LOCAL, GRADING_REMOTE, LINUX, MAKEFILE
+# REQUIRES - GRADING_REMOTE, LINUX, MAKEFILE
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
   DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
@@ -15,11 +15,10 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 PATHS=${DIR%$(basename "$SOURCE")}/paths.sh
 source "$PATHS"
-if [ -z ${GRADING_LOCAL+x} ] || [ -z ${GRADING_REMOTE+x} ] || [ -z ${LINUX+x} ] || [ -z ${MAKEFILE+x} ] ; then
+if [ -z ${GRADING_REMOTE+x} ] || [ -z ${LINUX+x} ] || [ -z ${MAKEFILE+x} ] ; then
   echo "$SOURCE"
   echo "$DIR"
   echo "Please install the path script ('path.sh') to $PATHS and update the following paths:
-  GRADING_LOCAL
   GRADING_REMOTE
   LINUX
   MAKEFILE"
@@ -41,13 +40,14 @@ done
 
 NAME="$1" # name of the individual, folder where the extracted contents will go
 ARCHIVE="$2" # archive name
+CWD="$(pwd)"
 
 put_makefile_in_dir() {
-  cd "$GRADING_LOCAL"/"$NAME"
+  cd "$NAME"
   go_to_dir_with_cpp
   echo Moving makefile to $(pwd)/makefile...
   cp "$MAKEFILE" makefile
-  cd "$GRADING_LOCAL"
+  cd "$CWD"
 }
 
 go_to_dir_with_cpp() {
@@ -88,11 +88,11 @@ if [[ -e "$MAKEFILE" && -e "$ARCHIVE" ]]; then
   put_makefile_in_dir
 
   # copy the folder to the linux directory
-  echo Moving $NAME\...
-  if $(scp -r "$GRADING_LOCAL"/"$NAME" $LINUX:$GRADING_REMOTE); then
+  echo Moving $NAME\... in $CWD
+  if $(scp -r "$CWD"/"$NAME" $LINUX:$GRADING_REMOTE); then
     echo $NAME moved successfully to PSU Linux systems at $GRADING_REMOTE.
     echo Cleaning up the directory...
-    rm -rf "$GRADING_LOCAL"/"$NAME"
+    rm -rf "$NAME"
     echo Done.
   fi
 elif [[ -e "$ARCHIVE" ]]; then

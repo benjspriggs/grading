@@ -32,9 +32,9 @@ leak_check() {
     # if there is, add the valgrind output to the file
     echo "Valgrind encountered errors, dumping output to $LOG_FILE..."
     if [ $retval = 2 ]; then
-      ERR_CODE="## Destructors did not deallocate all dynamic memory"
+      ERR_CODE="\t## Destructors did not deallocate all dynamic memory"
     else
-      ERR_CODE="## Program did not complete successfully due to runtime errors"
+      ERR_CODE="\t## Program did not complete successfully due to runtime errors"
     fi
     echo -e "$ERR_CODE\nFrom valgrind:" >> $report
     cat $LOG_FILE >> $report
