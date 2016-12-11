@@ -7,9 +7,9 @@
 
 calc_deductions() {
   col=$(( $2 )) ;
-  for num in `grep -Eo '[0-9]+' "$1"`; do 
-    col=$(($col-$num));
-  done;
+  for num in `grep -Eo '^[-+][0-9]+' "$1"`; do 
+    col=$(($col+$num))
+  done
   return $col
 }
 calc_deductions "$1" 100
