@@ -37,16 +37,17 @@ compile_strict() {
 
   # Compile with all errors enabled
   compiler_output="$(g++ $source_files -Wall -o "$executable" 2>&1)"
+  res=$?
 
-  if [ -z "$compiler_output" ]; then
+  if [ ! -z "$compiler_output" ]; then
     echo -e "\t\t## Compilation feedback" >> "$report"
     echo -e "$compiler_output" >> "$report"
   fi
 
-  if [ ${PIPESTATUS[0]} -ne 0 ];then
+  if [ $res -ne 0 ];then
     echo "### Program did not compile, or compiled with errors" >> "$report"
   fi
 
-  return ${PIPESTATUS[0]}
+  return $res
 }
 
