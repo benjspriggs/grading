@@ -24,7 +24,7 @@ A student report will be dumped out at the end, with any notes the grader made w
 # Moving from Local to Remote
 Run with:
 ```
-$ ./grade-move.sh <student-dir> <student-archive>
+$ ./move.sh <student-dir> <student-archive>
 ```
 Moves files from the grading-local to grading-remote folders, adding a makefile in the proper place for convenience.
 
