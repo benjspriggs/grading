@@ -101,10 +101,9 @@ _validate_archive_makefile(){
 
 # validate dir
 _valid_destination(){
-  echo "local dir is: ${local_dir}"
-	if [ ! -z "${local_dir}" ];
-    then
-      return 0
+  if [ ! -z "${local_dir}" ];
+  then
+    return 0
   else
     return 1
   fi
