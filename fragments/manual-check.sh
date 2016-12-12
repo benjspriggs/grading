@@ -26,10 +26,9 @@ manual_check() {
     vim -p *.cpp $report $feedback
   fi
   # open a new subshell for manually checking things
+  echo Opening new subshell for manual checking...
   bash --rcfile <(
-  clear
-  echo "Opening new subshell for manual checking..."
-  echo "'exit' when done."
-  PS1="manual-check $name$ "
+  echo "clear;
+  PS1='manual-check $name$ '";
   ) -i
 }
