@@ -15,11 +15,21 @@ manual_check() {
   }
 
   local report="$1"
+  local name="$(basename $(dirname $report))" # name from report
+  name="${name%.txt}"
+  local feedback="$(dirname $report)/feedback.txt"
   # TODO add some way to process comment density?
   if ls -l *.h > /dev/null 2>&1;then
-    vim -p *.h $report
+    vim -p *.h $report $feedback
   fi
   if ls -l *.cpp > /dev/null 2>&1; then
-    vim -p *.cpp $report
+    vim -p *.cpp $report $feedback
   fi
+  # open a new subshell for manually checking things
+  bash --rcfile <(
+  clear
+  echo "Opening new subshell for manual checking..."
+  echo "'exit' when done."
+  PS1="manual-check $name$ "
+  ) -i
 }
