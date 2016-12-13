@@ -35,7 +35,7 @@ and with the resulting zip filename `to_grade.zip` and path to this repo `~/path
 ```bash
 $ ~/path/d2l/sort-files.sh to_grade.zip
 ... # output of sort-files
-# ~/path/d2l/local-grade.sh all
+$ ~/path/d2l/local-grade.sh all
 ... # output of local-grade
 ```
 And now there's a folder `to_grade` with all of the extracted directores with makefiles in each. To find out which students turned in work after a certain time:
