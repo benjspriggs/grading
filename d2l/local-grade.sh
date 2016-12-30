@@ -31,10 +31,9 @@ do
   cd "$file"
   echo
   ls
-  touch _quit
-  select fn in *; do
+  select fn in * "quit"; do
     case "$fn" in
-      _quit) 
+      quit) 
         break
         ;;
       *) 
@@ -44,6 +43,5 @@ do
         ;;
     esac
   done
-  rm _quit
   cd ..
 done
