@@ -1,7 +1,8 @@
-# TODO.md
+# TODO
 - [x] Figure out style/ code requirements for CS162 homework assignments
 - [x] Figure out style/ code requirements for CS163 homework assignments
 - [x] Figure out style/ code requirements for CS202 homework assignments
+- [ ] Add tests for the d2l scripts, or at least evaluate how useful they'd be
 
 # CS162
 ## Code Requirements
