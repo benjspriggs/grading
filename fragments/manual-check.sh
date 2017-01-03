@@ -2,7 +2,9 @@
 # fragments/manual-check.sh
 # Manually open up all .h and .cpp files
 # in the current directory,
-# and a copy of the STUDENT_REPORT
+# and a copy of the STUDENT_REPORT,
+# along with a scratch feedback text file
+# for other notes.
 
 manual_check() {
   local usage="manual_check <report-fullpath>"
