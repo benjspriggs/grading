@@ -6,7 +6,7 @@ source ./fragments/count-globals.sh
 # begin
 @test "count_globals needs report name" {
   run count_globals
-    [ "$status" -eq 1 ]
+    [ "$status" == 1 ]
     [ $(expr "$output" : "Missing report") -ne 0 ]
 }
 
