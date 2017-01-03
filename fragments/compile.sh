@@ -36,8 +36,8 @@ compile_strict() {
   echo -e "Compiling $name\..."
 
   # Compile with all errors enabled
-  compiler_output="$(g++ $source_files -Wall -o "$executable" 2>&1)"
-  res=$?
+  compiler_output=`g++ $source_files -Wall -o "$executable" 2>&1`
+  res="$?"
 
   if [ ! -z "$compiler_output" ]; then
     echo -e "\t\t## Compilation feedback" >> "$report"

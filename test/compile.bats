@@ -23,9 +23,9 @@ source ./fragments/compile.sh
     [ $(expr "$output" : "executable") -eq 0 ]
 }
 
-@test "compile_strict gives output and zero exit status with empty folder" {
+@test "compile_strict gives output and nonzero exit status with empty folder" {
   run compile_strict "$TMP/foo" "$TMP/report.txt" "$EXECUTABLE"
-    [ "$status" -eq 0 ]
+    [ "$status" != 0 ]
     [ ! -z "$output" ]
 }
 
