@@ -19,7 +19,7 @@ source ./fragments/compile.sh
 
 @test "compile_strict needs executable name" {
   run compile_strict "foo" "bar"
-    [ "$status" -eq 1 ]
+    [ "$status" == 1 ]
     [ $(expr "$output" : "executable") -eq 0 ]
 }
 
