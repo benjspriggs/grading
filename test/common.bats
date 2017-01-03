@@ -6,12 +6,10 @@ source ./fragments/common.sh
 
 @test "die gives missing error message" {
   run die
-    [ "$status" -eq 1 ]
-    [ $(expr "$output" : "Missing error*") -ne 0 ]
+  requires_argument "error"
 }
 
 @test "die gives missing usage message" {
   run die "foo"
-    [ "$status" -eq 1 ]
-    [ $(expr "$output" : "Missing usage*") -ne 0 ]
+  requires_argument "usage"
 }

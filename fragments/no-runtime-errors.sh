@@ -5,7 +5,7 @@
 
 no_runtime_errors() {
   # make sure we have all the arguments
-  local usage="no_runtime_errors <filename> <report>"
+  local usage="no_runtime_errors <executable> <report>"
 
   # usage block
   {

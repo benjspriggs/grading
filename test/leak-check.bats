@@ -6,14 +6,12 @@ source ./fragments/leak-check.sh
 
 @test "leak_check needs a program name" {
   run leak_check
-    [ "$status" != 0 ]
-    [ $(expr "$output" : "program") -eq 0 ]
+  requires_argument "program"
 }
 
 @test "leak_check needs a report name" {
   run leak_check "$EXECUTABLE"
-    [ "$status" != 0 ]
-    [ $(expr "$output" : "report") -eq 0 ]
+  requires_argument "report"
 }
 
 @test "leak_check produces output on empty file" {

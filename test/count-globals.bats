@@ -3,17 +3,15 @@
 load fixtures
 
 source ./fragments/count-globals.sh
-# begin
+
 @test "count_globals needs report name" {
   run count_globals
-    [ "$status" == 1 ]
-    [ $(expr "$output" : "Missing report") -ne 0 ]
+  requires_argument "report"
 }
 
 @test "_nm_output does need filename" {
   run _nm_output
-    [ "$status" -eq 1 ]
-    [ $(expr "$output" : "Missing filename") -ne 0 ]
+  requires_argument "filename"
 }
 
 @test "_nm_output accepts and does not count an empty file" {
@@ -52,4 +50,4 @@ source ./fragments/count-globals.sh
     echo "$output" | grep "Counted"
       echo "$output" | grep "2"
 }
-# end
+

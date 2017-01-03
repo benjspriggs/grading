@@ -7,20 +7,17 @@ source ./fragments/compile.sh
 # TODO: Write tests for compile
 @test "compile_strict needs student folder name" {
   run compile_strict
-    [ "$status" -eq 1 ]
-    [ $(expr "$output" : "folder") -eq 0 ]
+  requires_argument "folder"
 }
 
 @test "compile_strict needs report name" {
   run compile_strict "foo"
-    [ "$status" -eq 1 ]
-    [ $(expr "$output" : "report") -eq 0 ]
+  requires_argument "report"
 }
 
 @test "compile_strict needs executable name" {
   run compile_strict "foo" "bar"
-    [ "$status" == 1 ]
-    [ $(expr "$output" : "executable") -eq 0 ]
+  requires_argument "executable"
 }
 
 @test "compile_strict gives output and nonzero exit status with empty folder" {
