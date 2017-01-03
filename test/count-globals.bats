@@ -43,7 +43,7 @@ source ./fragments/count-globals.sh
 @test "count_globals correctly counts globals in a file" {
   run count_globals "$REPORT" "$FIXTURES/has-global.cpp"
     [ "$status" -eq 0 ]
-    [ $(expr "$output" : "Counted 2") -ne 0 ]
+    [ $(expr "$output" : "Counted 2") != 0 ]
 }
 
 @test "count_globals correctly handles globals in a directory" {
