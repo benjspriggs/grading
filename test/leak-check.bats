@@ -18,7 +18,7 @@ source ./fragments/leak-check.sh
   touch "$EXECUTABLE"
     chmod +x "$EXECUTABLE"
     run leak_check "$EXECUTABLE" "$REPORT"
-    [ "$status" -eq 0 ]
+    [ "$status" = 0 ]
     [ ! -z "$output" ]
 }
 
