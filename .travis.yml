@@ -9,4 +9,4 @@ before_script:
         - sudo apt-get install bats
 script:
         - bats -v
-        - ./all-tests.sh
+        - make test
