@@ -8,6 +8,7 @@ setup() {
     export EXECUTABLE="$TMP/a.out"
     mkdir "$TMP" "$TMP/foo"
     touch "$TMP/emptyfile" "$TMP/emptyfile.cpp"
+    source ./fragments/common.sh
 }
 
 teardown() {
